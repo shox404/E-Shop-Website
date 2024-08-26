@@ -51,4 +51,5 @@ export const Content = styled.div<{ isOpen: boolean }>`
   margin-left: ${(p) => (p.isOpen ? "300px" : "0")};
   padding: 15px;
   transition: 0.5s;
+  min-height: 100dvh;
 `;
