@@ -33,6 +33,7 @@ export const Item = styled.div`
   padding-inline: 20px;
   display: flex;
   align-items: center;
+  gap: 10px;
   cursor: pointer;
   transition: 0.5s background-color;
   &:hover {

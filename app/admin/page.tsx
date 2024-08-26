@@ -7,19 +7,28 @@ import { SideBar, Item, Content } from "../_styles/layout";
 import { Title } from "../_styles/ui/text";
 import { usePathname, useRouter } from "next/navigation";
 import { Button, IconButton } from "../_styles/ui/element";
-import { ArrowLeftOutlined, LogoutOutlined } from "@ant-design/icons";
+import {
+  AppstoreOutlined,
+  ArrowLeftOutlined,
+  LogoutOutlined,
+  SettingOutlined,
+  ShopOutlined,
+} from "@ant-design/icons";
 import { useState } from "react";
 
 const links = [
   {
+    icon: <AppstoreOutlined />,
     title: "Dashboard",
     path: "/admin",
   },
   {
+    icon: <ShopOutlined />,
     title: "Products",
     path: "/admin/products",
   },
   {
+    icon: <SettingOutlined />,
     title: "Settings",
     path: "/admin/settings",
   },
@@ -51,6 +60,7 @@ export default function Admin() {
                 onClick={() => router.push(item.path)}
                 className={path == item.path ? "active" : ""}
               >
+                {item.icon}
                 {item.title}
               </Item>
             ))}
