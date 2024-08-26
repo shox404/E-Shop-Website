@@ -11,16 +11,23 @@ import {
   AppstoreOutlined,
   ArrowLeftOutlined,
   LogoutOutlined,
+  PlusOutlined,
   SettingOutlined,
   ShopOutlined,
 } from "@ant-design/icons";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { getCookie } from "../actions";
 
 const links = [
   {
     icon: <AppstoreOutlined />,
     title: "Dashboard",
     path: "/admin",
+  },
+  {
+    icon: <PlusOutlined />,
+    title: "Create",
+    path: "/admin/create",
   },
   {
     icon: <ShopOutlined />,
@@ -39,14 +46,18 @@ export default function Admin({ children }: { children: ReactNode }) {
   const path = usePathname();
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
+  useEffect(() => {
+    console.log(getCookie("admin-token"));
+  }, []);
+
   const toggleSideBar = () => setIsSideBarOpen(!isSideBarOpen);
 
   return (
     <Flex>
-      <SideBar isOpen={isSideBarOpen}>
+      <SideBar className={isSideBarOpen ? "open" : ""}>
         <Flex justify="space-between" align="center" className="header">
           <Link href="/admin">
-            <Title>Logo</Title>
+            <Title>E Shop</Title>
           </Link>
           <IconButton theme="dark" onClick={toggleSideBar} className="handler">
             <ArrowLeftOutlined />
@@ -70,7 +81,7 @@ export default function Admin({ children }: { children: ReactNode }) {
           </Button>
         </Flex>
       </SideBar>
-      <Content isOpen={isSideBarOpen}>{children}</Content>
+      <Content className={isSideBarOpen ? "open" : ""}>{children}</Content>
     </Flex>
   );
 }
