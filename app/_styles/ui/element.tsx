@@ -1,19 +1,31 @@
 import styled from "styled-components";
 
 import { Theme } from "@/app/types";
+import { theme } from "@/app/globals";
 
 export const DefaultBtn = styled.button<Theme>`
   outline: none;
   border: none;
   cursor: pointer;
-  background-color: ${(p) => (p.theme == "dark" ? "#02020281" : "#ebe2eb")};
-  color: ${(p) => (p.theme == "dark" ? "#ebedf0" : "#222222")};
+  background-color: ${(p) => theme.use(p.theme, "bgColor")};
+  color: ${(p) => theme.use(p.theme, "textColor")};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  &:hover {
+    scale: 1.05;
+  }
+  &:active {
+    scale: 1;
+    background-color: #3d3d3d81;
+  }
 `;
 
 export const Button = styled(DefaultBtn)`
-  height: 40px;
+  height: 50px;
   border-radius: 10px;
-  gap: 5px;
+  gap: 10px;
   font-size: 16px;
 `;
 
