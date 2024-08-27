@@ -1,7 +1,7 @@
+import Store from "./provider";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Provider } from "react-redux";
-import { store } from "./_store";
 import { ReactNode } from "react";
 
 import "./globals.css";
@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider store={store}>{children}</Provider>
+        <Store>{children}</Store>
       </body>
     </html>
   );

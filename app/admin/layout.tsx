@@ -49,7 +49,7 @@ export default function Admin({ children }: { children: ReactNode }) {
   useEffect(() => {
     setIsSideBarOpen(globalThis.innerWidth >= 480);
     const token = getCookie("admin-token");
-    if (!token || token === "") router.push("/admin-login");
+    // if (!token || token === "") router.push("/admin-login");
   }, []);
 
   const toggleSideBar = () => setIsSideBarOpen(!isSideBarOpen);

@@ -6,6 +6,7 @@ const baseQuery = fetchBaseQuery({
     // const token =
     //   .auth.user?.token ||
     //   localStorage.getItem("token");
+
     // if (token && token !== null) {
     //   headers.set("authorization", `Bearer ${token}`);
     // }
