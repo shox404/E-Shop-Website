@@ -1,5 +1,11 @@
 import { message } from "antd";
 
 export const errorMsg = (error: any) => {
-  if (error) message.error(error.data.message);
+  if (error) {
+    if (error?.data?.message) {
+      message.error(error?.data?.message);
+    } else {
+      message.error("Server error!");
+    }
+  }
 };

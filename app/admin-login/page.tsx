@@ -2,7 +2,7 @@
 
 import FormItem from "../_components/form-item";
 
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import { Styles } from "../_styles/admin/login";
 import { Title } from "../_styles/ui/text";
 import { AppButton, AppInput } from "../_styles/ui/element";
@@ -10,9 +10,10 @@ import { AdminLoginData } from "../types";
 import { useAdminLoginMutation } from "../_store/services/admin";
 import { useEffect } from "react";
 import { errorMsg } from "../utils";
+import { LoadingOutlined } from "@ant-design/icons";
 
 export default function Login() {
-  const [adminLogin, { error }] = useAdminLoginMutation();
+  const [adminLogin, { error, isLoading }] = useAdminLoginMutation();
 
   useEffect(() => errorMsg(error), [error]);
 
@@ -30,7 +31,11 @@ export default function Login() {
           name="password"
           isPsw
         />
-        <FormItem node={<AppButton as={Button}>Submit</AppButton>} />
+        <FormItem
+          node={
+            <AppButton>{isLoading ? <LoadingOutlined /> : ""}Submit</AppButton>
+          }
+        />
       </Form>
     </Styles>
   );
