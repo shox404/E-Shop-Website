@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { ReactNode, useEffect, useState } from "react";
 import { Flex } from "antd";
 import { SideBar, Item, Content } from "../_styles/admin/_layout";
 import { Title } from "../_styles/ui/text";
@@ -15,7 +16,6 @@ import {
   SettingOutlined,
   ShopOutlined,
 } from "@ant-design/icons";
-import { ReactNode, useEffect, useState } from "react";
 import { getCookie } from "../actions";
 
 const links = [
@@ -49,7 +49,7 @@ export default function Admin({ children }: { children: ReactNode }) {
   useEffect(() => {
     setIsSideBarOpen(globalThis.innerWidth >= 480);
     const token = getCookie("admin-token");
-    if (!token || token == "") router.push("/admin-login");
+    if (!token || token === "") router.push("/admin-login");
   }, []);
 
   const toggleSideBar = () => setIsSideBarOpen(!isSideBarOpen);
@@ -71,7 +71,7 @@ export default function Admin({ children }: { children: ReactNode }) {
               <Item
                 key={index}
                 onClick={() => router.push(item.path)}
-                className={path == item.path ? "active" : ""}
+                className={path === item.path ? "active" : ""}
               >
                 {item.icon}
                 {item.title}
