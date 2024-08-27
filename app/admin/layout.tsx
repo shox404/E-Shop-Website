@@ -42,12 +42,14 @@ const links = [
 ];
 
 export default function Admin({ children }: { children: ReactNode }) {
+  const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(true);
   const router = useRouter();
   const path = usePathname();
-  const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
   useEffect(() => {
-    console.log(getCookie("admin-token"));
+    setIsSideBarOpen(globalThis.innerWidth >= 480);
+    const token = getCookie("admin-token");
+    // if (!token || token == "") router.push("/admin-login");
   }, []);
 
   const toggleSideBar = () => setIsSideBarOpen(!isSideBarOpen);
@@ -57,9 +59,9 @@ export default function Admin({ children }: { children: ReactNode }) {
       <SideBar className={isSideBarOpen ? "open" : ""}>
         <Flex justify="space-between" align="center" className="header">
           <Link href="/admin">
-            <Title>E Shop</Title>
+            <Title color="#fff">E Shop</Title>
           </Link>
-          <IconButton theme="dark" onClick={toggleSideBar} className="handler">
+          <IconButton onClick={toggleSideBar} className="handler">
             <ArrowLeftOutlined />
           </IconButton>
         </Flex>
@@ -76,7 +78,7 @@ export default function Admin({ children }: { children: ReactNode }) {
               </Item>
             ))}
           </Flex>
-          <Button theme="dark">
+          <Button>
             Log out <LogoutOutlined />
           </Button>
         </Flex>

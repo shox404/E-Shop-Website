@@ -9,8 +9,7 @@ export const SideBar = styled.div`
   position: fixed;
   top: 0;
   left: -300px;
-  background-color: #121212;
-  color: #ebedf0;
+  background-color: #ffffff;
   .header {
     height: 30px;
     margin-bottom: 50px;
@@ -37,7 +36,8 @@ export const SideBar = styled.div`
 export const Item = styled.div`
   height: 50px;
   border-radius: 10px;
-  background-color: #0a0a0a;
+  background-color: #ffffff;
+  color: #222222;
   padding-inline: 20px;
   display: flex;
   align-items: center;
@@ -45,16 +45,16 @@ export const Item = styled.div`
   cursor: pointer;
   transition: 0.5s background-color;
   &:hover {
-    background-color: #3d3d3d81;
+    background-color: #807e9781;
   }
   &.active {
-    background-color: #3d3d3d81;
+    background-color: #807e9781;
   }
 `;
 
 export const Content = styled.div`
-  background-color: #000000;
-  color: #ebedf0;
+  background-color: #d6d6d6;
+  color: #181818;
   width: 100%;
   padding: 15px;
   transition: 0.5s;
@@ -62,5 +62,11 @@ export const Content = styled.div`
   &.open {
     width: calc(100% - 300px);
     margin-left: 300px;
+  }
+  @media screen and (max-width: 480px) {
+    &.open {
+      width: 100%;
+      margin-left: 0;
+    }
   }
 `;

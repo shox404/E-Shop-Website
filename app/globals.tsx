@@ -1,11 +1,11 @@
 import { ThemeType } from "./types";
 
-type ThemeKeys = "bgColor" | "textColor";
+type ThemeKeys = "bgColor" | "textColor" | "inputBg";
 
 export const theme = {
-  dark: { bgColor: "#0a0a0a", textColor: "#ebedf0" },
-  light: { bgColor: "#ebe2eb", textColor: "#222222" },
+  dark: { bgColor: "#0a0a0a", textColor: "#ebedf0", inputBg: "#141414" },
+  light: { bgColor: "", textColor: "", inputBg: "#ebe2eb" },
   use(theme: ThemeType, key: ThemeKeys) {
-    return theme == "dark" ? this.dark[key] : this.light[key];
+    return this[theme][key];
   },
 };
