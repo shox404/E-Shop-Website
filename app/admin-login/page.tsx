@@ -2,15 +2,19 @@
 
 import FormItem from "../_components/form-item";
 
-import { Form, Input } from "antd";
+import { Form, Input, message } from "antd";
 import { Styles } from "../_styles/admin/login";
 import { Title } from "../_styles/ui/text";
 import { Button, CustomInput } from "../_styles/ui/element";
 import { AdminLoginData } from "../types";
 import { useAdminLoginMutation } from "../_store/services/admin";
+import { useEffect } from "react";
+import { errorMsg } from "../utils";
 
 export default function Login() {
-  const [adminLogin] = useAdminLoginMutation();
+  const [adminLogin, { error }] = useAdminLoginMutation();
+
+  useEffect(() => errorMsg(error), [error]);
 
   const submit = async (value: AdminLoginData) => {
     await adminLogin(value).unwrap();

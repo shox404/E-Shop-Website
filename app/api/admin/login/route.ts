@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   const { name, password } = (await request.json()) as AdminLoginData;
 
   //   JWT_SECRET_KEY
-  if (!name || !password) return Reply({ message: "" }, 100);
+  if (!name || !password) return Reply({ message: "Enter details!" }, 400);
 
   return Reply({ message: "Successfully logged in." }, 200);
 }
