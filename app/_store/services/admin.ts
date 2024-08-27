@@ -5,7 +5,7 @@ export const adminApi = api.injectEndpoints({
   endpoints: (builder) => ({
     adminLogin: builder.mutation<IncomingMessage, AdminLoginData>({
       query: (loginData) => ({
-        url: "/api/",
+        url: "/admin/login",
         method: "POST",
         body: loginData,
       }),
