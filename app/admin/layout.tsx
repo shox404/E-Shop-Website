@@ -7,7 +7,7 @@ import { Flex } from "antd";
 import { SideBar, Item, Content } from "../_styles/admin/_layout";
 import { Title } from "../_styles/ui/text";
 import { usePathname, useRouter } from "next/navigation";
-import { Button, IconButton } from "../_styles/ui/element";
+import { AppButton, IconButton } from "../_styles/ui/element";
 import {
   AppstoreOutlined,
   ArrowLeftOutlined,
@@ -78,9 +78,9 @@ export default function Admin({ children }: { children: ReactNode }) {
               </Item>
             ))}
           </Flex>
-          <Button>
+          <AppButton>
             Log out <LogoutOutlined />
-          </Button>
+          </AppButton>
         </Flex>
       </SideBar>
       <Content className={isSideBarOpen ? "open" : ""}>{children}</Content>

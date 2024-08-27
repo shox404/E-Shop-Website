@@ -20,7 +20,7 @@ export const DefaultBtn = styled.button`
   }
 `;
 
-export const Button = styled(DefaultBtn)`
+export const AppButton = styled(DefaultBtn)`
   height: 50px;
   border-radius: 10px;
   gap: 10px;
@@ -34,7 +34,7 @@ export const IconButton = styled(DefaultBtn)`
   border-radius: 50%;
 `;
 
-export const CustomInput = styled.input`
+export const AppInput = styled.input`
   height: 40px;
   border-radius: 10px;
   padding-inline: 15px;
