@@ -7,13 +7,13 @@ import { Styles } from "../_styles/admin/login";
 import { Title } from "../_styles/ui/text";
 import { Button, CustomInput } from "../_styles/ui/element";
 import { AdminLoginData } from "../types";
-// import { useAdminLoginMutation } from "../_store/services/admin";
+import { useAdminLoginMutation } from "../_store/services/admin";
 
 export default function Login() {
-  // const [adminLogin] = useAdminLoginMutation();
+  const [adminLogin] = useAdminLoginMutation();
 
   const submit = async (value: AdminLoginData) => {
-    // await adminLogin(value).unwrap();
+    await adminLogin(value).unwrap();
   };
 
   return (
