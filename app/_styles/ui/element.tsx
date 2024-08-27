@@ -1,3 +1,4 @@
+import { Input } from "antd";
 import styled from "styled-components";
 
 export const DefaultBtn = styled.button`
@@ -33,18 +34,12 @@ export const IconButton = styled(DefaultBtn)`
   border-radius: 50%;
 `;
 
-export const Input = styled.input`
+export const CustomInput = styled.input`
   height: 40px;
   border-radius: 10px;
   padding-inline: 15px;
   font-size: 16px;
   outline: none;
-  border: none;
-  background-color: #141414;
-  color: #ebe2eb;
+  background-color: #f5f5f5 !important;
   transition: 0.5s;
-  &:focus {
-    scale: 1;
-    background-color: #3d3d3d81;
-  }
 `;

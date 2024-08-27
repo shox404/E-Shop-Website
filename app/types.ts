@@ -1,3 +1,4 @@
-export type ThemeType = "dark" | "light";
-
-export type Theme = { theme: ThemeType };
+export type AdminData = {
+  name: string;
+  password: string;
+};
