@@ -1,4 +1,3 @@
-export type AdminData = {
-  name: string;
-  password: string;
-};
+export type AdminLoginData = { name: string; password: string };
+
+export type IncomingMessage = { message: string };
