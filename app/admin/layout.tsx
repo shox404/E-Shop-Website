@@ -3,7 +3,7 @@
 import Link from "next/link";
 
 import { ReactNode, useEffect, useState } from "react";
-import { Flex } from "antd";
+import { Flex, Popconfirm } from "antd";
 import { SideBar, Item, Content } from "../_styles/admin/_layout";
 import { Title } from "../_styles/ui/text";
 import { usePathname, useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ import {
   SettingOutlined,
   ShopOutlined,
 } from "@ant-design/icons";
-import { getCookie } from "../actions";
+import { clearCookie, getCookie } from "../actions";
 
 const links = [
   {
@@ -54,6 +54,11 @@ export default function Admin({ children }: { children: ReactNode }) {
 
   const toggleSideBar = () => setIsSideBarOpen(!isSideBarOpen);
 
+  const logOut = () => {
+    clearCookie("admin-token");
+    router.push("/admin-login");
+  };
+
   return (
     <Flex>
       <SideBar className={isSideBarOpen ? "open" : ""}>
@@ -78,9 +83,11 @@ export default function Admin({ children }: { children: ReactNode }) {
               </Item>
             ))}
           </Flex>
-          <AppButton>
-            Log out <LogoutOutlined />
-          </AppButton>
+          <Popconfirm onConfirm={logOut} title="You can stay logged in." okText="Leave">
+            <AppButton>
+              Log out <LogoutOutlined />
+            </AppButton>
+          </Popconfirm>
         </Flex>
       </SideBar>
       <Content className={isSideBarOpen ? "open" : ""}>{children}</Content>
