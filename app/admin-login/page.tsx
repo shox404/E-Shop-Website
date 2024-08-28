@@ -1,7 +1,6 @@
 "use client";
 
 import FormItem from "../_components/form-item";
-
 import { Form, Input } from "antd";
 import { Styles } from "../_styles/admin/login";
 import { Title } from "../_styles/ui/text";
@@ -11,14 +10,20 @@ import { useAdminLoginMutation } from "../_store/services/admin";
 import { useEffect } from "react";
 import { errorMsg } from "../utils";
 import { LoadingOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [adminLogin, { error, isLoading }] = useAdminLoginMutation();
+  const router = useRouter();
 
   useEffect(() => errorMsg(error), [error]);
 
   const submit = async (value: AdminLoginData) => {
-    await adminLogin(value).unwrap();
+    await adminLogin(value)
+      .unwrap()
+      .then(() => {
+        router.push("/admin");
+      });
   };
 
   return (
