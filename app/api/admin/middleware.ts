@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { reply } from "./api/utils";
+import { reply } from "../utils";
 import jwt from "jsonwebtoken";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  console.log("hi");
   const token = request.cookies.get("admin-token")?.value;
   if (!token) return reply({ message: "Unauthorised!" }, 401);
   try {
@@ -13,6 +14,6 @@ export function middleware(request: NextRequest) {
   }
 }
 
-export const config = {
-  matcher: ["/login", "/admin"],
-};
+// export const config = {
+//   matcher: ["/((?!api|_next/static|favicon.ico).*)"],
+// };

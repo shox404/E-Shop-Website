@@ -1,10 +1,10 @@
-import { AdminData } from "@/app/types";
+import { AdminData } from "@/app/global/types";
 import { NextRequest } from "next/server";
 import { reply } from "../utils";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase.config";
 import { cookies } from "next/headers";
-import { expires } from "@/app/actions";
+import { expires } from "@/app/global/actions";
 // import { verify } from "../middleware";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";

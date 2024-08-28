@@ -16,7 +16,7 @@ import {
   SettingOutlined,
   ShopOutlined,
 } from "@ant-design/icons";
-import { clearCookie, getCookie } from "../actions";
+import { clearCookie, getCookie } from "../global/actions";
 
 const links = [
   {

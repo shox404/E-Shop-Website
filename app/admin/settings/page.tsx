@@ -6,13 +6,13 @@ import { Form, Input } from "antd";
 import { Styles } from "../../_styles/admin/settings";
 import { Title } from "../../_styles/ui/text";
 import { AppButton, AppInput } from "../../_styles/ui/element";
-import { AdminData } from "../../types";
+import { AdminData } from "../../global/types";
 import {
   useEditAdminDataMutation,
   useGetAdminDataQuery,
 } from "../../_store/services/admin";
 import { ChangeEvent, useEffect } from "react";
-import { errorMsg } from "../../utils";
+import { errorMsg } from "../../global/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CurrentAdminData, PayloadMsg } from "@/app/types";
+import { CurrentAdminData, PayloadMsg } from "@/app/global/types";
 import { message } from "antd";
 import { loginAdmin, getAdminData, editAdminData } from "../services/admin";
 import { ChangeEvent } from "react";
