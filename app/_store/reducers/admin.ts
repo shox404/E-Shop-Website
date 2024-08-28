@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CurrentAdminData, IncomingMessage } from "@/app/types";
+import { CurrentAdminData, PayloadMsg } from "@/app/types";
 import { message } from "antd";
-import { loginAdmin, getAdminData } from "../services/admin";
+import { loginAdmin, getAdminData, editAdminData } from "../services/admin";
 import { ChangeEvent } from "react";
 
 type State = { data: CurrentAdminData };
@@ -22,16 +22,19 @@ const admin = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addMatcher(
-        loginAdmin.matchFulfilled,
-        (_state, { payload }: { payload: IncomingMessage }) => {
-          message.success(payload.message);
-        }
-      )
+      .addMatcher(loginAdmin.matchFulfilled, (_, { payload }: PayloadMsg) => {
+        message.success(payload.message);
+      })
       .addMatcher(
         getAdminData.matchFulfilled,
         (state, { payload }: { payload: CurrentAdminData }) => {
           state.data = payload;
+        }
+      )
+      .addMatcher(
+        editAdminData.matchFulfilled,
+        (_, { payload }: PayloadMsg) => {
+          message.success(payload.message);
         }
       );
   },

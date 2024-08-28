@@ -6,9 +6,9 @@ import { Form, Input } from "antd";
 import { Styles } from "../../_styles/admin/settings";
 import { Title } from "../../_styles/ui/text";
 import { AppButton, AppInput } from "../../_styles/ui/element";
-import { AdminLoginData } from "../../types";
+import { AdminData } from "../../types";
 import {
-  useLoginAdminMutation,
+  useEditAdminDataMutation,
   useGetAdminDataQuery,
 } from "../../_store/services/admin";
 import { ChangeEvent, useEffect } from "react";
@@ -22,13 +22,13 @@ export default function Settings() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const adminData = useGetAdminDataQuery();
-  const [login, { error, isLoading }] = useLoginAdminMutation();
+  const [edit, { error, isLoading }] = useEditAdminDataMutation();
   const { data } = useAppSelector((state) => state.admin);
 
   useEffect(() => errorMsg(error), [error]);
 
-  const submit = async (value: AdminLoginData) => {
-    await login(value)
+  const submit = async (value: AdminData) => {
+    await edit(value)
       .unwrap()
       .then(() => router.push("/admin"));
   };

@@ -1,21 +1,13 @@
-import { AdminLoginData, CurrentAdminData, IncomingMessage } from "@/app/types";
+import { AdminData, CurrentAdminData, IncomingMessage } from "@/app/types";
 import { api } from "../api";
 
 export const adminApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    loginAdmin: builder.mutation<IncomingMessage, AdminLoginData>({
-      query: (loginData) => ({
-        url: "/admin",
-        method: "POST",
-        body: loginData,
-      }),
+    loginAdmin: builder.mutation<IncomingMessage, AdminData>({
+      query: (body) => ({ url: "/admin", method: "POST", body }),
     }),
-    editAdminData: builder.mutation<IncomingMessage, AdminLoginData>({
-      query: (loginData) => ({
-        url: "/admin",
-        method: "POST",
-        body: loginData,
-      }),
+    editAdminData: builder.mutation<IncomingMessage, AdminData>({
+      query: (body) => ({ url: "/admin", method: "PUT", body }),
     }),
     getAdminData: builder.query<CurrentAdminData, void>({
       query: () => ({ url: "/admin", method: "GET" }),
@@ -23,7 +15,10 @@ export const adminApi = api.injectEndpoints({
   }),
 });
 
-export const { useLoginAdminMutation, useGetAdminDataQuery } = adminApi;
 export const {
-  endpoints: { loginAdmin, getAdminData },
+  useLoginAdminMutation,
+  useGetAdminDataQuery,
+  useEditAdminDataMutation,
 } = adminApi;
+
+export const { loginAdmin, getAdminData, editAdminData } = adminApi.endpoints;

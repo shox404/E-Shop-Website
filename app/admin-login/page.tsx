@@ -5,7 +5,7 @@ import { Form, Input } from "antd";
 import { Styles } from "../_styles/admin/login";
 import { Title } from "../_styles/ui/text";
 import { AppButton, AppInput } from "../_styles/ui/element";
-import { AdminLoginData } from "../types";
+import { AdminData } from "../types";
 import { useLoginAdminMutation } from "../_store/services/admin";
 import { useEffect } from "react";
 import { errorMsg } from "../utils";
@@ -18,7 +18,7 @@ export default function Login() {
 
   useEffect(() => errorMsg(error), [error]);
 
-  const submit = async (value: AdminLoginData) => {
+  const submit = async (value: AdminData) => {
     await login(value)
       .unwrap()
       .then(() => router.push("/admin"));
