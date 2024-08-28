@@ -1,16 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CurrentAdminData, IncomingMessage } from "@/app/types";
+import { AdminLoginData, CurrentAdminData, IncomingMessage } from "@/app/types";
 import { message } from "antd";
 import { adminLogin, getAdminData } from "../services/admin";
+import { ChangeEvent } from "react";
 
-type State = { data: CurrentAdminData };
+type State = { data: AdminLoginData };
 
 const admin = createSlice({
   name: "admin",
   initialState: {
-    data: {},
+    data: { name: "", password: "" },
   } as State,
-  reducers: {},
+  reducers: {
+    SET_VALUE: (
+      state,
+      { payload }: { payload: ChangeEvent<HTMLInputElement> }
+    ) => {
+      const { name, value } = payload.target;
+      if (name === "name" || name === "password") state.data[name] = value;
+    },
+  },
   extraReducers(builder) {
     builder
       .addMatcher(
@@ -21,11 +30,12 @@ const admin = createSlice({
       )
       .addMatcher(
         getAdminData.matchFulfilled,
-        (state, { payload }: { payload: CurrentAdminData }) => {
+        (state, { payload }: { payload: AdminLoginData }) => {
           state.data = payload;
         }
       );
   },
 });
 
+export const { SET_VALUE } = admin.actions;
 export default admin.reducer;
