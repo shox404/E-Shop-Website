@@ -10,7 +10,7 @@ export const adminApi = api.injectEndpoints({
         body: loginData,
       }),
     }),
-    getAdminData: builder.query<AdminLoginData, void>({
+    getAdminData: builder.query<CurrentAdminData, void>({
       query: () => ({ url: "/admin", method: "GET" }),
     }),
   }),

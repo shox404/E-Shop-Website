@@ -23,6 +23,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/styled-components": "^5.1.34",
     "antd": "^5.20.2",
     "bcrypt": "^5.1.1",
     "eslint": "^8",

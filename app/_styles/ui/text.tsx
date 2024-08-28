@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Default = styled.text`
+export const Default = styled.p`
   font-family: sans-serif;
 `;
 
