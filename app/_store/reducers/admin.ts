@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { adminApi } from "../services/admin";
-import { AdminLoginData, IncomingMessage } from "@/app/types";
+import { CurrentAdminData, IncomingMessage } from "@/app/types";
 import { message } from "antd";
+import { adminLogin, getAdminData } from "../services/admin";
 
-type State = { data: AdminLoginData };
+type State = { data: CurrentAdminData };
 
 const admin = createSlice({
   name: "admin",
@@ -12,12 +12,19 @@ const admin = createSlice({
   } as State,
   reducers: {},
   extraReducers(builder) {
-    builder.addMatcher(
-      adminApi.endpoints.adminLogin.matchFulfilled,
-      (_state, { payload }: { payload: IncomingMessage }) => {
-        message.success(payload.message);
-      }
-    );
+    builder
+      .addMatcher(
+        adminLogin.matchFulfilled,
+        (_state, { payload }: { payload: IncomingMessage }) => {
+          message.success(payload.message);
+        }
+      )
+      .addMatcher(
+        getAdminData.matchFulfilled,
+        (state, { payload }: { payload: CurrentAdminData }) => {
+          state.data = payload;
+        }
+      );
   },
 });
 

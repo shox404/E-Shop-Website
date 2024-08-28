@@ -1,12 +1,17 @@
 import { AdminLoginData } from "@/app/types";
 import { NextRequest } from "next/server";
-import { Reply } from "../../utils";
+import { Reply } from "../utils";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase.config";
 import { cookies } from "next/headers";
 import { expires } from "@/app/actions";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+export async function GET(_request: NextRequest) {
+  const data = (await getDoc(doc(db, "app", "admin"))).data() as AdminLoginData;
+  return Reply({ name: data.name }, 200);
+}
 
 export async function POST(request: NextRequest) {
   const cookieStore = cookies();

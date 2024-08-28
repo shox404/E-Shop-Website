@@ -6,7 +6,7 @@ import { Styles } from "../../_styles/admin/settings";
 import { Title } from "../../_styles/ui/text";
 import { AppButton, AppInput } from "../../_styles/ui/element";
 import { AdminLoginData } from "../../types";
-import { useAdminLoginMutation } from "../../_store/services/admin";
+import { useAdminLoginMutation, useGetAdminDataQuery } from "../../_store/services/admin";
 import { useEffect } from "react";
 import { errorMsg } from "../../utils";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 
 export default function Settings() {
   const [adminLogin, { error, isLoading }] = useAdminLoginMutation();
+  const {} = useGetAdminDataQuery()
   const router = useRouter();
 
   useEffect(() => errorMsg(error), [error]);
@@ -29,7 +30,7 @@ export default function Settings() {
   return (
     <Styles>
       <Form layout="vertical" onFinish={submit}>
-        <Title>Log in</Title>
+        <Title>Edit admin data</Title>
         <FormItem node={<AppInput as={Input} />} name="name" />
         <FormItem
           node={<AppInput as={Input.Password} />}
