@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { CurrentAdminData, IncomingMessage } from "@/app/types";
 import { message } from "antd";
-import { adminLogin, getAdminData } from "../services/admin";
+import { loginAdmin, getAdminData } from "../services/admin";
 import { ChangeEvent } from "react";
 
 type State = { data: CurrentAdminData };
@@ -14,30 +14,26 @@ const admin = createSlice({
   reducers: {
     SET_VALUE: (
       state,
-      { payload }: { payload: { key: "password" | "name"; value: string } }
+      { payload }: { payload: ChangeEvent<HTMLFormElement> }
     ) => {
-      // const { name, value } = payload.target;
-      // console.log(name);
-
-      // state.data?.[payload.name] = payload.value;
-      // if (payload.name === "name" || payload.value === "password")
-        state.data[payload.key] = payload.value;
+      if (payload.target.id === "name" || payload.target.id === "password")
+        state.data[payload.target.id] = payload.target.value;
     },
   },
   extraReducers(builder) {
     builder
       .addMatcher(
-        adminLogin.matchFulfilled,
+        loginAdmin.matchFulfilled,
         (_state, { payload }: { payload: IncomingMessage }) => {
           message.success(payload.message);
         }
       )
-      // .addMatcher(
-      //   getAdminData.matchFulfilled,
-      //   (state, { payload }: { payload: CurrentAdminData }) => {
-      //     state.data = payload;
-      //   }
-      // );
+      .addMatcher(
+        getAdminData.matchFulfilled,
+        (state, { payload }: { payload: CurrentAdminData }) => {
+          state.data = payload;
+        }
+      );
   },
 });
 

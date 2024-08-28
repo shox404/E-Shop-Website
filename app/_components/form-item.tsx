@@ -9,7 +9,7 @@ interface Props {
   isEmail?: boolean;
 }
 
-const FormItem = ({ name, node, isPsw, isEmail }: Props) => {
+export default function FormItem({ name, node, isPsw, isEmail }: Props) {
   let rules: Rule[] = [{ required: true, message: `Please enter ${name}.` }];
 
   if (isPsw) {
@@ -29,6 +29,4 @@ const FormItem = ({ name, node, isPsw, isEmail }: Props) => {
       {node}
     </Form.Item>
   );
-};
-
-export default FormItem;
+}

@@ -3,7 +3,14 @@ import { api } from "../api";
 
 export const adminApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    adminLogin: builder.mutation<IncomingMessage, AdminLoginData>({
+    loginAdmin: builder.mutation<IncomingMessage, AdminLoginData>({
+      query: (loginData) => ({
+        url: "/admin",
+        method: "POST",
+        body: loginData,
+      }),
+    }),
+    editAdminData: builder.mutation<IncomingMessage, AdminLoginData>({
       query: (loginData) => ({
         url: "/admin",
         method: "POST",
@@ -16,7 +23,7 @@ export const adminApi = api.injectEndpoints({
   }),
 });
 
-export const { useAdminLoginMutation, useGetAdminDataQuery } = adminApi;
+export const { useLoginAdminMutation, useGetAdminDataQuery } = adminApi;
 export const {
-  endpoints: { adminLogin, getAdminData },
+  endpoints: { loginAdmin, getAdminData },
 } = adminApi;

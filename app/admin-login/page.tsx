@@ -6,24 +6,22 @@ import { Styles } from "../_styles/admin/login";
 import { Title } from "../_styles/ui/text";
 import { AppButton, AppInput } from "../_styles/ui/element";
 import { AdminLoginData } from "../types";
-import { useAdminLoginMutation } from "../_store/services/admin";
+import { useLoginAdminMutation } from "../_store/services/admin";
 import { useEffect } from "react";
 import { errorMsg } from "../utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
-  const [adminLogin, { error, isLoading }] = useAdminLoginMutation();
+  const [login, { error, isLoading }] = useLoginAdminMutation();
   const router = useRouter();
 
   useEffect(() => errorMsg(error), [error]);
 
   const submit = async (value: AdminLoginData) => {
-    await adminLogin(value)
+    await login(value)
       .unwrap()
-      .then(() => {
-        router.push("/admin");
-      });
+      .then(() => router.push("/admin"));
   };
 
   return (
