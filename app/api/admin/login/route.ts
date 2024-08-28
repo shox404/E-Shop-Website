@@ -14,14 +14,12 @@ export async function POST(request: NextRequest) {
   if (!name || !password) return Reply({ message: "Enter details!" }, 400);
   const data = (await getDoc(doc(db, "app", "admin"))).data() as AdminLoginData;
   const compare = await bcrypt.compare(password, data.password);
-  if (data.name !== name && !compare) {
-    return Reply({ message: "Unauthorized!" }, 401);
-  } else {
+  if (data.name === name && compare) {
     const token = jwt.sign(data, process.env.JWT_SECRET_KEY!);
-    console.log(token);
     cookieStore.set("admin-token", token, { expires });
+  } else {
+    return Reply({ message: "Unauthorized!" }, 401);
   }
-
   return Reply({ message: "Successfully logged in." }, 200);
 }
 
