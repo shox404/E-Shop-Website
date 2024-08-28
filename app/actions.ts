@@ -1,5 +1,7 @@
 import Cookie from "js-cookie";
 
+export const expires = new Date(Date.now() + 10 * 24 * 60 * 60 * 1000);
+
 export const getCookie = (key: string) => {
   return Cookie.get(key);
 };
