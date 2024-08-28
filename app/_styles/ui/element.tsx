@@ -1,5 +1,5 @@
 import { Input } from "antd";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export const DefaultBtn = styled.button`
   outline: none;
@@ -11,12 +11,16 @@ export const DefaultBtn = styled.button`
   justify-content: center;
   align-items: center;
   transition: 0.3s;
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: #303030;
   }
-  &:active {
+  &:active:not(:disabled) {
     scale: 0.95;
     background-color: #303030;
+  }
+  &:disabled {
+    background-color: #1b1b1b;
+    color: #cacaca;
   }
 `;
 

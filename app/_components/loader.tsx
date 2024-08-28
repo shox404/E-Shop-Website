@@ -1,5 +1,5 @@
 import { LoadingOutlined } from "@ant-design/icons";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export default function Loader() {
   return (

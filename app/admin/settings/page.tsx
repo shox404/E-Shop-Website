@@ -55,7 +55,7 @@ export default function Settings() {
           />
           <FormItem
             node={
-              <AppButton>
+              <AppButton disabled={isLoading}>
                 {isLoading ? <LoadingOutlined /> : ""} Submit
               </AppButton>
             }
