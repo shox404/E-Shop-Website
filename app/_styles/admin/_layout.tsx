@@ -10,6 +10,7 @@ export const SideBar = styled.div`
   top: 0;
   left: -300px;
   background-color: #ffffff;
+  z-index: 100;
   .header {
     height: 30px;
     margin-bottom: 50px;
@@ -30,6 +31,10 @@ export const SideBar = styled.div`
       left: auto;
       rotate: 0deg;
     }
+  }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    left: -100%;
   }
 `;
 

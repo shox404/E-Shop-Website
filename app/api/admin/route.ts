@@ -10,7 +10,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export async function GET(request: NextRequest) {
-  await verify(request);
   const data = (await getDoc(doc(db, "app", "admin"))).data() as AdminData;
   return reply({ name: data.name }, 200);
 }
@@ -31,6 +30,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PUT(request: NextRequest) {
+  await verify(request);
   const cookieStore = cookies();
   const { name, password } = (await request.json()) as AdminData;
   if (!name || !password) return reply({ message: "Enter details!" }, 400);
