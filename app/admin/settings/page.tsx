@@ -26,13 +26,11 @@ export default function Settings() {
   const { data } = useAppSelector((state) => state.admin);
 
   useEffect(() => errorMsg(error), [error]);
-  
+
   useEffect(() => errorMsg(adminData.error), [adminData.error]);
 
   const submit = async (value: AdminData) => {
-    await edit(value)
-      .unwrap()
-      .then(() => router.push("/admin"));
+    await edit(value).unwrap();
   };
 
   const setValue = (e: ChangeEvent<HTMLFormElement>) => dispatch(SET_VALUE(e));

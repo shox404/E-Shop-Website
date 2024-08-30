@@ -28,9 +28,12 @@ export default function Login() {
     <Styles>
       <Form layout="vertical" onFinish={submit}>
         <Title>Log in</Title>
-        <FormItem node={<AppInput as={Input} />} name="name" />
         <FormItem
-          node={<AppInput as={Input.Password} />}
+          node={<AppInput as={Input} placeholder="Shoxruh" />}
+          name="name"
+        />
+        <FormItem
+          node={<AppInput as={Input.Password} placeholder="123456" />}
           name="password"
           isPsw
         />
