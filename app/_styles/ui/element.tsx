@@ -39,9 +39,8 @@ export const IconButton = styled(DefaultBtn)`
 `;
 
 export const AppInput = styled.input`
-  height: 40px;
+  height: 45px;
   border-radius: 10px;
-  padding-inline: 15px;
   font-size: 16px;
   outline: none;
   background-color: #f5f5f5 !important;

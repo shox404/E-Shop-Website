@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 
 export const Styles = styled.div`
-  background-color: #d6d6d6;
-  min-height: calc(100% - 70px);
   padding: 20px;
+  min-height: calc(100% - 70px);
   display: flex;
   justify-content: center;
   align-items: center;

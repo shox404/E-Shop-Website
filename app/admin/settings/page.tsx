@@ -14,20 +14,19 @@ import {
 import { ChangeEvent, Fragment, useEffect } from "react";
 import { errorMsg } from "@/app/global/utils";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
 import { SET_VALUE } from "@/app/_store/reducers/admin";
 
 export default function Settings() {
-  const router = useRouter();
   const dispatch = useAppDispatch();
-  const adminData = useGetAdminDataQuery();
   const [edit, { error, isLoading }] = useEditAdminDataMutation();
   const { data } = useAppSelector((state) => state.admin);
+  const adminData = useGetAdminDataQuery();
 
-  useEffect(() => errorMsg(error), [error]);
-
-  useEffect(() => errorMsg(adminData.error), [adminData.error]);
+  useEffect(() => {
+    errorMsg(error);
+    errorMsg(adminData.error);
+  }, [error, adminData.error]);
 
   const submit = async (value: AdminData) => {
     await edit(value).unwrap();
@@ -51,6 +50,7 @@ export default function Settings() {
             initialValues={data}
           >
             <Title>Edit admin data</Title>
+            <br />
             <FormItem node={<AppInput as={Input} />} name="name" />
             <FormItem
               node={<AppInput as={Input.Password} />}
