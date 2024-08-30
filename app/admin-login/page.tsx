@@ -1,14 +1,14 @@
 "use client";
 
-import FormItem from "../_components/form-item";
+import FormItem from "@/app/_components/form-item";
 import { Form, Input } from "antd";
-import { Styles } from "../_styles/admin/login";
-import { Title } from "../_styles/ui/text";
-import { AppButton, AppInput } from "../_styles/ui/element";
-import { AdminData } from "../global/types";
-import { useLoginAdminMutation } from "../_store/services/admin";
+import { Styles } from "@/app/_styles/admin/login";
+import { Title } from "@/app/_styles/ui/text";
+import { AppButton, AppInput } from "@/app/_styles/ui/element";
+import { AdminData } from "@/app/global/types";
+import { useLoginAdminMutation } from "@/app/_store/services/admin";
 import { useEffect } from "react";
-import { errorMsg } from "../global/utils";
+import { errorMsg } from "@/app/global/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 

@@ -1,16 +1,16 @@
 import { AdminData } from "@/app/global/types";
 import { NextRequest } from "next/server";
-import { reply } from "../utils";
+import { reply } from "@/app/api/utils";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase.config";
 import { cookies } from "next/headers";
 import { expires } from "@/app/global/actions";
-// import { verify } from "../middleware";
+import { verify } from "@/app/api/utils";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export async function GET(request: NextRequest) {
-  // verify(request);
+  await verify(request);
   const data = (await getDoc(doc(db, "app", "admin"))).data() as AdminData;
   return reply({ name: data.name }, 200);
 }

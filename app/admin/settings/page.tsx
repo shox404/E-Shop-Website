@@ -1,18 +1,18 @@
 "use client";
 
-import FormItem from "../../_components/form-item";
+import FormItem from "@/app/_components/form-item";
 import Loader from "@/app/_components/loader";
 import { Form, Input } from "antd";
-import { Styles } from "../../_styles/admin/settings";
-import { Title } from "../../_styles/ui/text";
-import { AppButton, AppInput } from "../../_styles/ui/element";
-import { AdminData } from "../../global/types";
+import { Styles } from "@/app/_styles/admin/settings";
+import { Title } from "@/app/_styles/ui/text";
+import { AppButton, AppInput } from "@/app/_styles/ui/element";
+import { AdminData } from "@/app/global/types";
 import {
   useEditAdminDataMutation,
   useGetAdminDataQuery,
-} from "../../_store/services/admin";
+} from "@/app/_store/services/admin";
 import { ChangeEvent, useEffect } from "react";
-import { errorMsg } from "../../global/utils";
+import { errorMsg } from "@/app/global/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
@@ -26,6 +26,8 @@ export default function Settings() {
   const { data } = useAppSelector((state) => state.admin);
 
   useEffect(() => errorMsg(error), [error]);
+  
+  useEffect(() => errorMsg(adminData.error), [adminData.error]);
 
   const submit = async (value: AdminData) => {
     await edit(value)

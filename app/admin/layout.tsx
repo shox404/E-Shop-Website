@@ -4,10 +4,10 @@ import Link from "next/link";
 
 import { ReactNode, useEffect, useState } from "react";
 import { Flex, Popconfirm } from "antd";
-import { SideBar, Item, Content } from "../_styles/admin/_layout";
-import { Title } from "../_styles/ui/text";
+import { SideBar, Item, Content } from "@/app/_styles/admin/_layout";
+import { Title } from "@/app/_styles/ui/text";
 import { usePathname, useRouter } from "next/navigation";
-import { AppButton, IconButton } from "../_styles/ui/element";
+import { AppButton, IconButton } from "@/app/_styles/ui/element";
 import {
   AppstoreOutlined,
   ArrowLeftOutlined,
@@ -16,7 +16,7 @@ import {
   SettingOutlined,
   ShopOutlined,
 } from "@ant-design/icons";
-import { clearCookie, getCookie } from "../global/actions";
+import { clearCookie, getCookie } from "@/app/global/actions";
 
 const links = [
   {
