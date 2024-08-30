@@ -4,7 +4,9 @@ export const Default = styled.p`
   font-family: sans-serif;
 `;
 
-export const Text = styled(Default)``;
+export const Text = styled(Default)`
+  font-weight: 700;
+`;
 
 export const Title = styled(Default)`
   font-size: 25px;

@@ -47,3 +47,8 @@ export const AppInput = styled.input`
   background-color: #f5f5f5 !important;
   transition: 0.5s;
 `;
+
+export const Navbar = styled.nav`
+  padding: 20px;
+  height: 70px;
+`;

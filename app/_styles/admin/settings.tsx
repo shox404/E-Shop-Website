@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 
 export const Styles = styled.div`
-  padding: 20px;
   background-color: #d6d6d6;
+  min-height: calc(100% - 70px);
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   form {
     border-radius: 15px;
     width: 350px;

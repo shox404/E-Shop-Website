@@ -4,14 +4,14 @@ import FormItem from "@/app/_components/form-item";
 import Loader from "@/app/_components/loader";
 import { Form, Input } from "antd";
 import { Styles } from "@/app/_styles/admin/settings";
-import { Title } from "@/app/_styles/ui/text";
-import { AppButton, AppInput } from "@/app/_styles/ui/element";
+import { Text, Title } from "@/app/_styles/ui/text";
+import { AppButton, AppInput, Navbar } from "@/app/_styles/ui/element";
 import { AdminData } from "@/app/global/types";
 import {
   useEditAdminDataMutation,
   useGetAdminDataQuery,
 } from "@/app/_store/services/admin";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, Fragment, useEffect } from "react";
 import { errorMsg } from "@/app/global/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useRouter } from "next/navigation";
@@ -39,29 +39,34 @@ export default function Settings() {
     return <Loader />;
   } else {
     return (
-      <Styles>
-        <Form
-          layout="vertical"
-          onFinish={submit}
-          onChange={setValue}
-          initialValues={data}
-        >
-          <Title>Edit admin data</Title>
-          <FormItem node={<AppInput as={Input} />} name="name" />
-          <FormItem
-            node={<AppInput as={Input.Password} />}
-            name="password"
-            isPsw
-          />
-          <FormItem
-            node={
-              <AppButton disabled={isLoading}>
-                {isLoading ? <LoadingOutlined /> : ""} Submit
-              </AppButton>
-            }
-          />
-        </Form>
-      </Styles>
+      <Fragment>
+        <Navbar>
+          <Text>Settings</Text>
+        </Navbar>
+        <Styles>
+          <Form
+            layout="vertical"
+            onFinish={submit}
+            onChange={setValue}
+            initialValues={data}
+          >
+            <Title>Edit admin data</Title>
+            <FormItem node={<AppInput as={Input} />} name="name" />
+            <FormItem
+              node={<AppInput as={Input.Password} />}
+              name="password"
+              isPsw
+            />
+            <FormItem
+              node={
+                <AppButton disabled={isLoading}>
+                  {isLoading ? <LoadingOutlined /> : ""} Submit
+                </AppButton>
+              }
+            />
+          </Form>
+        </Styles>
+      </Fragment>
     );
   }
 }
