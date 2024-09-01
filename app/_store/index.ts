@@ -1,11 +1,12 @@
 import admin from "./reducers/admin";
+import items from "./reducers/items";
 
 import { configureStore } from "@reduxjs/toolkit";
 import { api } from "./api";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
-  reducer: { [api.reducerPath]: api.reducer, admin },
+  reducer: { [api.reducerPath]: api.reducer, admin, items },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
 });

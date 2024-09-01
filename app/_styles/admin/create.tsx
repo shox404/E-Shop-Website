@@ -7,8 +7,8 @@ export const Styles = styled.div`
   justify-content: center;
   align-items: center;
   form {
-    border-radius: 15px;
-    width: 350px;
+    border-radius: 20px;
+    width: 100%;
     background-color: #ffffff;
     padding: 25px 35px 20px 35px;
     button,

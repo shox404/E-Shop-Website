@@ -59,6 +59,11 @@ export default function Admin({ children }: { children: ReactNode }) {
     router.push("/admin-login");
   };
 
+  const goTo = (path: string) => {
+    router.push(path);
+    if (globalThis.innerWidth <= 480) toggleSideBar();
+  };
+
   return (
     <Flex>
       <SideBar className={isSideBarOpen ? "open" : ""}>
@@ -75,7 +80,7 @@ export default function Admin({ children }: { children: ReactNode }) {
             {links.map((item, index) => (
               <Item
                 key={index}
-                onClick={() => router.push(item.path)}
+                onClick={() => goTo(item.path)}
                 className={path === item.path ? "active" : ""}
               >
                 {item.icon}
@@ -83,7 +88,11 @@ export default function Admin({ children }: { children: ReactNode }) {
               </Item>
             ))}
           </Flex>
-          <Popconfirm onConfirm={logOut} title="You can stay logged in." okText="Leave">
+          <Popconfirm
+            onConfirm={logOut}
+            title="You can stay logged in."
+            okText="Leave"
+          >
             <AppButton>
               Log out <LogoutOutlined />
             </AppButton>

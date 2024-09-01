@@ -11,13 +11,14 @@ export const SideBar = styled.div`
   left: -300px;
   background-color: #ffffff;
   z-index: 100;
+  border-radius: 0 20px 20px 0;
   .header {
     height: 30px;
     margin-bottom: 50px;
     .handler {
       transition: 0.5s;
       position: fixed;
-      left: 30px;
+      left: 15px;
       rotate: 180deg;
     }
   }
@@ -35,6 +36,7 @@ export const SideBar = styled.div`
   @media screen and (max-width: 480px) {
     width: 100%;
     left: -100%;
+    border-radius: 0;
   }
 `;
 

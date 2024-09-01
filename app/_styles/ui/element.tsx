@@ -48,6 +48,11 @@ export const AppInput = styled.input`
 `;
 
 export const Navbar = styled.nav`
-  padding: 20px;
+  padding: 30px;
+  margin-inline: 20px;
+  border-radius: 20px;
   height: 70px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
 `;
