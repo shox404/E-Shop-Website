@@ -1,12 +1,15 @@
 "use client";
 
 import FormItem from "@/app/_components/form-item";
+import { SET_ITEM } from "@/app/_store/reducers/items";
 import { Styles } from "@/app/_styles/admin/create";
 import { AppButton, AppInput, Navbar } from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
+import { Detail, FormValue } from "@/app/global/types";
 import { InboxOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Form, Input, message, Upload, UploadProps } from "antd";
-import { ChangeEvent, Fragment } from "react";
+import { ChangeEvent, FormEvent, Fragment } from "react";
+import { useDispatch } from "react-redux";
 
 const props: UploadProps = {
   name: "file",
@@ -17,16 +20,21 @@ const props: UploadProps = {
 };
 
 export default function Create() {
+  const dispatch = useDispatch();
+
   const submit = (value: any) => {
     console.log(value);
   };
 
-  const setValue = (e: ChangeEvent<HTMLFormElement>) => null;
+  const setValue = ({ key, value }: Detail) =>
+    dispatch(SET_ITEM({ key, value }));
 
   const upload = (info: any) => {
     const { status, name } = info.file;
-    // info.fileList.map((e: any) => e.response)
-    // setValue()
+    setValue({
+      key: "images",
+      value: info.fileList.map((e: any) => e.response),
+    });
     if (status === "done") {
       message.success(`${name} file uploaded successfully.`);
     } else if (status === "error") {
@@ -43,7 +51,9 @@ export default function Create() {
         <Form
           layout="vertical"
           onFinish={submit}
-          onChange={setValue}
+          onChange={({ target: { name, value } }: FormValue) =>
+            setValue({ key: name, value })
+          }
           initialValues={[]}
         >
           <Title>New item</Title>

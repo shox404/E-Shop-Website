@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CurrentAdminData, PayloadMsg } from "@/app/global/types";
+import { CurrentAdminData, FormValue, PayloadMsg } from "@/app/global/types";
 import { message } from "antd";
 import { loginAdmin, getAdminData, editAdminData } from "../services/admin";
 import { ChangeEvent } from "react";
@@ -12,10 +12,7 @@ const admin = createSlice({
     data: { name: "", password: "" },
   } as State,
   reducers: {
-    SET_VALUE: (
-      state,
-      { payload }: { payload: ChangeEvent<HTMLFormElement> }
-    ) => {
+    SET_VALUE: (state, { payload }: { payload: FormValue }) => {
       if (payload.target.id === "name" || payload.target.id === "password")
         state.data[payload.target.id] = payload.target.value;
     },

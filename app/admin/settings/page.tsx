@@ -6,7 +6,7 @@ import { Form, Input } from "antd";
 import { Styles } from "@/app/_styles/admin/settings";
 import { Text, Title } from "@/app/_styles/ui/text";
 import { AppButton, AppInput, Navbar } from "@/app/_styles/ui/element";
-import { AdminData } from "@/app/global/types";
+import { AdminData, FormValue } from "@/app/global/types";
 import {
   useEditAdminDataMutation,
   useGetAdminDataQuery,
@@ -32,7 +32,7 @@ export default function Settings() {
     await edit(value).unwrap();
   };
 
-  const setValue = (e: ChangeEvent<HTMLFormElement>) => dispatch(SET_VALUE(e));
+  const setValue = (e: FormValue) => dispatch(SET_VALUE(e));
 
   if (adminData.isLoading) {
     return <Loader />;
