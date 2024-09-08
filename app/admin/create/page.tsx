@@ -1,15 +1,15 @@
 "use client";
 
 import FormItem from "@/app/_components/form-item";
+import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
 import { SET_ITEM } from "@/app/_store/reducers/items";
 import { Styles } from "@/app/_styles/admin/create";
 import { AppButton, AppInput, Navbar } from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
-import { Detail, FormValue } from "@/app/global/types";
+import { Detail, FormValue, Item } from "@/app/global/types";
 import { InboxOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Form, Input, message, Upload, UploadProps } from "antd";
-import { ChangeEvent, FormEvent, Fragment } from "react";
-import { useDispatch } from "react-redux";
+import { Fragment } from "react";
 
 const props: UploadProps = {
   name: "file",
@@ -20,23 +20,20 @@ const props: UploadProps = {
 };
 
 export default function Create() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { item } = useAppSelector((state) => state.items);
 
-  const submit = (value: any) => {
+  const submit = (value: Item) => {
     console.log(value);
   };
 
-  const setValue = ({ key, value }: Detail) =>
-    dispatch(SET_ITEM({ key, value }));
+  const setValue = (e: Detail) => dispatch(SET_ITEM(e));
 
   const upload = (info: any) => {
     const { status, name } = info.file;
-    setValue({
-      key: "images",
-      value: info.fileList.map((e: any) => e.response),
-    });
     if (status === "done") {
       message.success(`${name} file uploaded successfully.`);
+      setValue({ key: "images", value: info.fileList.map((e: any) => e.response) });
     } else if (status === "error") {
       message.error(`${name} file upload failed.`);
     }
@@ -48,17 +45,14 @@ export default function Create() {
         <Text>Create</Text>
       </Navbar>
       <Styles>
-        <Form
-          layout="vertical"
-          onFinish={submit}
-          onChange={({ target: { name, value } }: FormValue) =>
-            setValue({ key: name, value })
-          }
-          initialValues={[]}
-        >
+        <div className="content">
           <Title>New item</Title>
           <br />
-          <Upload.Dragger {...props} onChange={upload}>
+          <Upload.Dragger
+            {...props}
+            onChange={upload}
+            defaultFileList={item.images}
+          >
             <p className="ant-upload-drag-icon">
               <InboxOutlined />
             </p>
@@ -71,20 +65,32 @@ export default function Create() {
             </p>
           </Upload.Dragger>
           <br />
-          <FormItem node={<AppInput as={Input} />} name="title" />
-          <FormItem node={<AppInput as={Input} type="number" />} name="price" />
-          <FormItem
-            node={<AppInput as={Input.TextArea} />}
-            name="description"
-          />
-          <FormItem
-            node={
-              <AppButton disabled={false}>
-                {false ? <LoadingOutlined /> : ""} Submit
-              </AppButton>
+          <Form
+            layout="vertical"
+            onFinish={submit}
+            onChange={({ target: { id, value } }: FormValue) =>
+              setValue({ key: id, value })
             }
-          />
-        </Form>
+            initialValues={item}
+          >
+            <FormItem node={<AppInput as={Input} />} name="title" />
+            <FormItem
+              node={<AppInput as={Input} type="number" prefix="$" />}
+              name="price"
+            />
+            <FormItem
+              node={<AppInput as={Input.TextArea} />}
+              name="description"
+            />
+            <FormItem
+              node={
+                <AppButton disabled={false}>
+                  {false ? <LoadingOutlined /> : ""} Submit
+                </AppButton>
+              }
+            />
+          </Form>
+        </div>
       </Styles>
     </Fragment>
   );

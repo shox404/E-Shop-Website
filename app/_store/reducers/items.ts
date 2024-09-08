@@ -17,7 +17,7 @@ const items = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addMatcher(createItem.matchFulfilled, (state, { payload }) => {});
+    builder.addMatcher(createItem.matchFulfilled, (state, { payload }) => { });
   },
 });
 

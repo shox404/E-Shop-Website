@@ -6,17 +6,19 @@ export const Styles = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  form {
+  .content {
     border-radius: 20px;
     width: 100%;
     background-color: #ffffff;
     padding: 25px 35px 20px 35px;
-    button,
-    input {
-      width: 100%;
-    }
-    button {
-      margin-top: 20px;
+    form {
+      button,
+      input {
+        width: 100%;
+      }
+      button {
+        margin-top: 20px;
+      }
     }
   }
 `;
