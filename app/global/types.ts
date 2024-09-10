@@ -10,11 +10,13 @@ export type PayloadMsg = { payload: IncomingMessage };
 
 export type Item = {
   id?: string;
+  quantity?: number;
   images: any[];
   title: string;
   price: number;
   description: string;
   active: boolean;
+  amount: number;
 };
 
 export type Detail = { key: string; value: any };

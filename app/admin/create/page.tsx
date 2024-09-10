@@ -3,12 +3,19 @@
 import FormItem from "@/app/_components/form-item";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
 import { SET_ITEM } from "@/app/_store/reducers/items";
+import { useCreateItemMutation } from "@/app/_store/services/items";
 import { Styles } from "@/app/_styles/admin/create";
-import { AppButton, AppInput, Navbar } from "@/app/_styles/ui/element";
+import {
+  AppButton,
+  AppInput,
+  AppSelect,
+  AppTextArea,
+  Navbar,
+} from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
 import { Detail, FormValue, Item } from "@/app/global/types";
 import { InboxOutlined, LoadingOutlined } from "@ant-design/icons";
-import { Form, Input, message, Upload, UploadProps } from "antd";
+import { Form, message, Upload, UploadProps } from "antd";
 import { Fragment } from "react";
 
 const props: UploadProps = {
@@ -22,9 +29,14 @@ const props: UploadProps = {
 export default function Create() {
   const dispatch = useAppDispatch();
   const { item } = useAppSelector((state) => state.items);
+  const [create] = useCreateItemMutation();
 
-  const submit = (value: Item) => {
-    console.log(value);
+  const submit = async (value: Item) => {
+    if (item.images !== undefined) {
+      await create(value).unwrap();
+    } else {
+      message.warning("Please upload images");
+    }
   };
 
   const setValue = (e: Detail) => dispatch(SET_ITEM(e));
@@ -33,7 +45,12 @@ export default function Create() {
     const { status, name } = info.file;
     if (status === "done") {
       message.success(`${name} file uploaded successfully.`);
-      setValue({ key: "images", value: info.fileList.map((e: any) => e.response) });
+      setValue({
+        key: "images",
+        value: info.fileList.map((e: any) => e.response),
+      });
+    } else if (status === "removed" && info.fileList.length < 1) {
+      setValue({ key: "images", value: undefined });
     } else if (status === "error") {
       message.error(`${name} file upload failed.`);
     }
@@ -73,15 +90,17 @@ export default function Create() {
             }
             initialValues={item}
           >
-            <FormItem node={<AppInput as={Input} />} name="title" />
+            <FormItem node={<AppInput />} name="title" />
             <FormItem
-              node={<AppInput as={Input} type="number" prefix="$" />}
+              node={<AppInput type="number" prefix="$" min={0} />}
               name="price"
             />
             <FormItem
-              node={<AppInput as={Input.TextArea} />}
-              name="description"
+              node={<AppInput type="number" min={1} defaultValue={1} />}
+              name="amount"
             />
+            <FormItem node={<AppSelect />} name="category" />
+            <FormItem node={<AppTextArea />} name="description" />
             <FormItem
               node={
                 <AppButton disabled={false}>
