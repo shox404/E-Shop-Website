@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-
 import { ReactNode, useEffect, useState } from "react";
 import { Flex, Popconfirm } from "antd";
 import { SideBar, Item, Content } from "@/app/_styles/admin/_layout";
@@ -41,7 +40,12 @@ const links = [
   },
 ];
 
-export default function Admin({ children }: { children: ReactNode }) {
+interface AdminProps {
+  children: ReactNode;
+  dashboard: boolean; // Assuming this is the missing property
+}
+
+export default function Admin({ children, dashboard }: AdminProps) {
   const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(true);
   const router = useRouter();
   const path = usePathname();
