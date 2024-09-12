@@ -72,6 +72,9 @@ export const Navbar = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  button {
+    height: 45px;
+  }
   @media screen and (max-width: 480px) {
     margin-inline: 0px;
     width: 100%;

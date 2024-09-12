@@ -7,3 +7,7 @@
 body {
   background-color: #d6d6d6;
 }
+
+.ant-upload {
+  height: 200px !important;
+}

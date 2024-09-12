@@ -17,21 +17,20 @@ import {
   DeleteOutlined,
   EditFilled,
   EllipsisOutlined,
+  PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Carousel, Dropdown, Image, MenuProps } from "antd";
+import { Carousel, Dropdown, Flex, Image, MenuProps } from "antd";
 import { ChangeEvent, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { format } from "@/app/global/utils";
 import Tooltip from "@/app/_components/tooltip";
+import ItemEditor from "@/app/_drawers/item-editor";
+import { useRouter } from "next/navigation";
 
 const drops: MenuProps["items"] = [
   {
-    label: (
-      <div>
-        <EditFilled /> Edit
-      </div>
-    ),
+    label: <ItemEditor />,
     key: "0",
   },
   {
@@ -48,21 +47,29 @@ export default function Products() {
   const { items } = useAppSelector((state) => state.items);
   const { isLoading } = useGetItemQuery();
   const [search, setSearch] = useState("");
+  const router = useRouter();
 
   const useSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
+  const goCreate = () => router.push("/admin/create");
+
   return (
     <Loader is={isLoading}>
       <Navbar>
         <Text>Products</Text>
-        <AppInput
-          prefix={<SearchOutlined />}
-          placeholder="Search"
-          width={200}
-          onChange={useSearch}
-        />
+        <Flex gap={10}>
+          <AppInput
+            prefix={<SearchOutlined />}
+            placeholder="Search"
+            width={200}
+            onChange={useSearch}
+          />
+          <AppButton onClick={goCreate}>
+            Create <PlusOutlined />
+          </AppButton>
+        </Flex>
       </Navbar>
       <Styles layout>
         <AnimatePresence>
