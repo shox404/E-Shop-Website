@@ -1,10 +1,10 @@
 "use client";
 
 import FormItem from "@/app/_components/form-item";
-import { Form, Input } from "antd";
+import { Form } from "antd";
 import { Styles } from "@/app/_styles/admin/login";
 import { Title } from "@/app/_styles/ui/text";
-import { AppButton, AppInput } from "@/app/_styles/ui/element";
+import { AppButton, AppInput, AppPassword } from "@/app/_styles/ui/element";
 import { AdminData } from "@/app/global/types";
 import { useLoginAdminMutation } from "@/app/_store/services/admin";
 import { useEffect } from "react";
@@ -28,12 +28,9 @@ export default function Login() {
     <Styles>
       <Form layout="vertical" onFinish={submit}>
         <Title>Log in</Title>
+        <FormItem node={<AppInput placeholder="Shoxruh" />} name="name" />
         <FormItem
-          node={<AppInput as={Input} placeholder="Shoxruh" />}
-          name="name"
-        />
-        <FormItem
-          node={<AppInput as={Input.Password} placeholder="123456" />}
+          node={<AppPassword placeholder="123456" />}
           name="password"
           isPsw
         />

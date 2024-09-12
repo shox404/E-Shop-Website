@@ -13,10 +13,11 @@ import {
   Navbar,
 } from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
-import { Detail, FormValue, Item } from "@/app/global/types";
+import { Detail, FormValue } from "@/app/global/types";
+import { options, errorMsg } from "@/app/global/utils";
 import { InboxOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Form, message, Upload, UploadProps } from "antd";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 
 const props: UploadProps = {
   name: "file",
@@ -29,11 +30,13 @@ const props: UploadProps = {
 export default function Create() {
   const dispatch = useAppDispatch();
   const { item } = useAppSelector((state) => state.items);
-  const [create] = useCreateItemMutation();
+  const [create, { isLoading, error }] = useCreateItemMutation();
 
-  const submit = async (value: Item) => {
+  useEffect(() => errorMsg(error), [error]);
+
+  const submit = async () => {
     if (item.images !== undefined) {
-      await create(value).unwrap();
+      await create(item).unwrap();
     } else {
       message.warning("Please upload images");
     }
@@ -91,20 +94,17 @@ export default function Create() {
             initialValues={item}
           >
             <FormItem node={<AppInput />} name="title" />
+            <FormItem node={<AppSelect options={options} />} name="category" />
             <FormItem
               node={<AppInput type="number" prefix="$" min={0} />}
               name="price"
             />
-            <FormItem
-              node={<AppInput type="number" min={1} defaultValue={1} />}
-              name="amount"
-            />
-            <FormItem node={<AppSelect />} name="category" />
+            <FormItem node={<AppInput type="number" min={1} />} name="amount" />
             <FormItem node={<AppTextArea />} name="description" />
             <FormItem
               node={
-                <AppButton disabled={false}>
-                  {false ? <LoadingOutlined /> : ""} Submit
+                <AppButton disabled={isLoading}>
+                  {isLoading ? <LoadingOutlined /> : ""} Submit
                 </AppButton>
               }
             />

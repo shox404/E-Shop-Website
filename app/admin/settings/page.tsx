@@ -2,16 +2,16 @@
 
 import FormItem from "@/app/_components/form-item";
 import Loader from "@/app/_components/loader";
-import { Form, Input } from "antd";
+import { Form } from "antd";
 import { Styles } from "@/app/_styles/admin/settings";
 import { Text, Title } from "@/app/_styles/ui/text";
-import { AppButton, AppInput, Navbar } from "@/app/_styles/ui/element";
+import { AppButton, AppInput, AppPassword, Navbar } from "@/app/_styles/ui/element";
 import { AdminData, FormValue } from "@/app/global/types";
 import {
   useEditAdminDataMutation,
   useGetAdminDataQuery,
 } from "@/app/_store/services/admin";
-import { ChangeEvent, Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { errorMsg } from "@/app/global/utils";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
@@ -51,9 +51,9 @@ export default function Settings() {
           >
             <Title>Edit admin data</Title>
             <br />
-            <FormItem node={<AppInput as={Input} />} name="name" />
+            <FormItem node={<AppInput />} name="name" />
             <FormItem
-              node={<AppInput as={Input.Password} />}
+              node={<AppPassword />}
               name="password"
               isPsw
             />

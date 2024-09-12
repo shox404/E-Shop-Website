@@ -1,23 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createItem } from "../services/items";
+import { createItem, getItem } from "../services/items";
 import { Detail, Item } from "@/app/global/types";
 
 type State = {
   item: Item;
+  items: Item[];
 };
 
 const items = createSlice({
   name: "items",
   initialState: {
     item: {},
-  } as State,
+    items: [],
+  } as unknown as State,
   reducers: {
     SET_ITEM: (state, { payload }: { payload: Detail }) => {
       state.item = { ...state.item, [payload.key]: payload.value };
     },
   },
   extraReducers(builder) {
-    builder.addMatcher(createItem.matchFulfilled, (state, { payload }) => { });
+    builder
+      .addMatcher(createItem.matchFulfilled, (state, { payload }) => {
+        state.items.push(payload);
+      })
+      .addMatcher(getItem.matchFulfilled, (state, { payload }) => {
+        state.items = payload;
+      });
   },
 });
 

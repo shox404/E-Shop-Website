@@ -1,6 +1,5 @@
 import { Input, Select } from "antd";
 import styled from "@emotion/styled";
-import TextArea from "antd/es/input/TextArea";
 
 export const DefaultBtn = styled.button`
   outline: none;
@@ -39,7 +38,7 @@ export const IconButton = styled(DefaultBtn)`
   border-radius: 50%;
 `;
 
-export const AppInput = styled(Input)`
+const InputUi = `
   height: 45px;
   border-radius: 10px;
   font-size: 16px;
@@ -47,13 +46,11 @@ export const AppInput = styled(Input)`
   transition: 0.5s;
 `;
 
-export const AppTextArea = styled(TextArea)`
-  height: 45px;
-  border-radius: 10px;
-  font-size: 16px;
-  background-color: #f5f5f5 !important;
-  transition: 0.5s;
-`;
+export const AppInput = styled(Input)(InputUi);
+
+export const AppPassword = styled(Input.Password)(InputUi);
+
+export const AppTextArea = styled(Input.TextArea)(InputUi);
 
 export const AppSelect = styled(Select)`
   height: 45px;

@@ -9,3 +9,10 @@ export const errorMsg = (error: any) => {
     }
   }
 };
+
+const categoryOptions = () => {
+  const category = ["item", "meal"];
+  return category.map((e) => ({ value: e[0].toUpperCase() + e.slice(1) }));
+};
+
+export const options = categoryOptions();
