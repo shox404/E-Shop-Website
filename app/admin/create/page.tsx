@@ -2,7 +2,7 @@
 
 import FormItem from "@/app/_components/form-item";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
-import { SET_ITEM } from "@/app/_store/reducers/items";
+import { CLEAR_ITEM, SET_ITEM } from "@/app/_store/reducers/items";
 import { useCreateItemMutation } from "@/app/_store/services/items";
 import { Styles } from "@/app/_styles/admin/create";
 import {
@@ -13,10 +13,11 @@ import {
   Navbar,
 } from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
-import { Detail, FormValue } from "@/app/global/types";
+import { Detail, FormValue, Item } from "@/app/global/types";
 import { options, errorMsg } from "@/app/global/utils";
 import { InboxOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Form, message, Upload, UploadProps } from "antd";
+import { useRouter } from "next/navigation";
 import { Fragment, useEffect } from "react";
 
 const props: UploadProps = {
@@ -31,12 +32,18 @@ export default function Create() {
   const dispatch = useAppDispatch();
   const { item } = useAppSelector((state) => state.items);
   const [create, { isLoading, error }] = useCreateItemMutation();
+  const router = useRouter();
 
   useEffect(() => errorMsg(error), [error]);
 
   const submit = async () => {
     if (item.images !== undefined) {
-      await create(item).unwrap();
+      await create(item)
+        .unwrap()
+        .then(() => {
+          router.push("/admin/products");
+          dispatch(CLEAR_ITEM());
+        });
     } else {
       message.warning("Please upload images");
     }

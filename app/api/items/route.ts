@@ -7,7 +7,7 @@ import { verify } from "@/app/api/utils";
 export async function GET() {
   try {
     const { docs } = await getDocs(collection(db, "items"));
-    const data = docs.forEach((item) => ({ id: item.id, ...item.data() }));
+    const data = docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     return reply(data, 200);
   } catch {
     return reply({ message: "Server error" }, 500);

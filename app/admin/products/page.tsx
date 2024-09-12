@@ -7,7 +7,7 @@ import { Styles } from "@/app/_styles/admin/products";
 import { Navbar } from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
 import { Item } from "@/app/global/types";
-import { Image } from "antd";
+import { Carousel, Image } from "antd";
 import { Fragment } from "react";
 
 export default function Products() {
@@ -23,17 +23,20 @@ export default function Products() {
           <Text>Products</Text>
         </Navbar>
         <Styles>
-          <div className="card">
-            <div className="image">
-              <Image.PreviewGroup>
-                <Image src="" />
-              </Image.PreviewGroup>
-            </div>
-            <Title>Product</Title>
-            <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus corporis ut, consequuntur numquam quam magni nam ducimus deleniti aspernatur, dolores enim, reiciendis temporibus obcaecati laboriosam qui aperiam inventore tenetur id!</Text>
-          </div>
           {items.map((item: Item, index: number) => (
-            <div key={index} className="card">{item.title}</div>
+            <div className="card" key={index}>
+              <div className="images">
+                <Carousel arrows>
+                  {item.images.map((art, index) => (
+                    <Image src={art} key={index} className="image" />
+                  ))}
+                </Carousel>
+              </div>
+              <div className="footer">
+                <Title>{item.title}</Title>
+                <Text>{item.description}</Text>
+              </div>
+            </div>
           ))}
         </Styles>
       </Fragment>

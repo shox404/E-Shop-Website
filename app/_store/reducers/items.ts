@@ -7,15 +7,28 @@ type State = {
   items: Item[];
 };
 
+const initialState: State = {
+  item: {
+    images: [],
+    title: "",
+    price: 0,
+    description: "",
+    active: false,
+    amount: 0,
+    category: "Item",
+  },
+  items: [],
+};
+
 const items = createSlice({
   name: "items",
-  initialState: {
-    item: {},
-    items: [],
-  } as unknown as State,
+  initialState,
   reducers: {
     SET_ITEM: (state, { payload }: { payload: Detail }) => {
       state.item = { ...state.item, [payload.key]: payload.value };
+    },
+    CLEAR_ITEM: (state) => {
+      state.item = initialState.item;
     },
   },
   extraReducers(builder) {
@@ -29,5 +42,5 @@ const items = createSlice({
   },
 });
 
-export const { SET_ITEM } = items.actions;
+export const { SET_ITEM, CLEAR_ITEM } = items.actions;
 export default items.reducer;
