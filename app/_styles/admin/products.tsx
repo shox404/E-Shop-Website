@@ -17,9 +17,6 @@ export const Styles = styled(motion.div)`
     .images {
       overflow: hidden;
       border-radius: 16px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       .image {
         height: 150px;
         display: flex;
