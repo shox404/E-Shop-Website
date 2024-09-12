@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
+import { motion } from "framer-motion";
 
-export const Styles = styled.div`
+export const Styles = styled(motion.div)`
   padding: 20px;
   height: 100%;
   display: flex;
