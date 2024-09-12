@@ -4,9 +4,10 @@ import Loader from "@/app/_components/loader";
 import { useAppSelector } from "@/app/_store/hooks";
 import { useGetItemQuery } from "@/app/_store/services/items";
 import { Styles } from "@/app/_styles/admin/products";
-import { Navbar } from "@/app/_styles/ui/element";
+import { AppInput, Navbar } from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
 import { Item } from "@/app/global/types";
+import { SearchOutlined } from "@ant-design/icons";
 import { Carousel, Image } from "antd";
 import { Fragment } from "react";
 
@@ -21,6 +22,11 @@ export default function Products() {
       <Fragment>
         <Navbar>
           <Text>Products</Text>
+          <AppInput
+            prefix={<SearchOutlined />}
+            placeholder="Search"
+            width={200}
+          />
         </Navbar>
         <Styles>
           {items.map((item: Item, index: number) => (

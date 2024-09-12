@@ -38,15 +38,16 @@ export const IconButton = styled(DefaultBtn)`
   border-radius: 50%;
 `;
 
-const InputUi = `
+const InputUi = (p: any) => `
   height: 45px;
   border-radius: 10px;
   font-size: 16px;
   background-color: #f5f5f5 !important;
   transition: 0.5s;
+  width: ${p.width}px;
 `;
 
-export const AppInput = styled(Input)(InputUi);
+export const AppInput = styled(Input)<{ width?: number }>(InputUi);
 
 export const AppPassword = styled(Input.Password)(InputUi);
 
@@ -70,6 +71,7 @@ export const Navbar = styled.nav`
   background-color: #fff;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   @media screen and (max-width: 480px) {
     margin-inline: 0px;
     width: 100%;
