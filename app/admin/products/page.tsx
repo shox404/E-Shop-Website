@@ -4,8 +4,8 @@ import Loader from "@/app/_components/loader";
 import { useAppSelector } from "@/app/_store/hooks";
 import { useGetItemQuery } from "@/app/_store/services/items";
 import { Styles } from "@/app/_styles/admin/products";
-import { AppInput, Navbar } from "@/app/_styles/ui/element";
-import { Text, Title } from "@/app/_styles/ui/text";
+import { AppButton, AppInput, Navbar } from "@/app/_styles/ui/element";
+import { Text, Thin, Title } from "@/app/_styles/ui/text";
 import { Item } from "@/app/global/types";
 import { SearchOutlined } from "@ant-design/icons";
 import { Carousel, Image } from "antd";
@@ -21,10 +21,8 @@ export default function Products() {
     setSearch(e.target.value);
   };
 
-  if (isLoading) {
-    return <Loader />;
-  } else {
-    return (
+  return (
+    <Loader is={isLoading}>
       <Fragment>
         <Navbar>
           <Text>Products</Text>
@@ -59,13 +57,15 @@ export default function Products() {
                   </div>
                   <div className="footer">
                     <Title>{item.title}</Title>
-                    <Text>{item.description}</Text>
+                    <Thin>{item.description}</Thin>
+                    <Thin>$ {item.price}</Thin>
+                    <AppButton></AppButton>
                   </div>
                 </motion.div>
               ))}
           </AnimatePresence>
         </Styles>
       </Fragment>
-    );
-  }
+    </Loader>
+  );
 }
