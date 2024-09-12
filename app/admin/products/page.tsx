@@ -9,7 +9,7 @@ import { Text, Thin, Title } from "@/app/_styles/ui/text";
 import { Item } from "@/app/global/types";
 import { SearchOutlined } from "@ant-design/icons";
 import { Carousel, Image } from "antd";
-import { ChangeEvent, Fragment, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Products() {
@@ -23,49 +23,47 @@ export default function Products() {
 
   return (
     <Loader is={isLoading}>
-      <Fragment>
-        <Navbar>
-          <Text>Products</Text>
-          <AppInput
-            prefix={<SearchOutlined />}
-            placeholder="Search"
-            width={200}
-            onChange={useSearch}
-          />
-        </Navbar>
-        <Styles layout>
-          <AnimatePresence>
-            {items
-              .filter((item: Item) =>
-                item.title.toLowerCase().includes(search.toLowerCase())
-              )
-              .map((item: Item) => (
-                <motion.div
-                  className="card"
-                  key={item.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <div className="images">
-                    <Carousel arrows>
-                      {item.images.map((art, index) => (
-                        <Image src={art} key={index} className="image" />
-                      ))}
-                    </Carousel>
-                  </div>
-                  <div className="footer">
-                    <Title>{item.title}</Title>
-                    <Thin>{item.description}</Thin>
-                    <Thin>$ {item.price}</Thin>
-                    <AppButton></AppButton>
-                  </div>
-                </motion.div>
-              ))}
-          </AnimatePresence>
-        </Styles>
-      </Fragment>
+      <Navbar>
+        <Text>Products</Text>
+        <AppInput
+          prefix={<SearchOutlined />}
+          placeholder="Search"
+          width={200}
+          onChange={useSearch}
+        />
+      </Navbar>
+      <Styles layout>
+        <AnimatePresence>
+          {items
+            .filter((item: Item) =>
+              item.title.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((item: Item) => (
+              <motion.div
+                className="card"
+                key={item.id}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="images">
+                  <Carousel arrows>
+                    {item.images.map((art, index) => (
+                      <Image src={art} key={index} className="image" />
+                    ))}
+                  </Carousel>
+                </div>
+                <div className="footer">
+                  <Title>{item.title}</Title>
+                  <Thin>{item.description}</Thin>
+                  <Thin>$ {item.price}</Thin>
+                  <AppButton></AppButton>
+                </div>
+              </motion.div>
+            ))}
+        </AnimatePresence>
+      </Styles>
     </Loader>
   );
 }

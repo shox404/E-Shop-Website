@@ -5,7 +5,12 @@ import Loader from "@/app/_components/loader";
 import { Form } from "antd";
 import { Styles } from "@/app/_styles/admin/settings";
 import { Text, Title } from "@/app/_styles/ui/text";
-import { AppButton, AppInput, AppPassword, Navbar } from "@/app/_styles/ui/element";
+import {
+  AppButton,
+  AppInput,
+  AppPassword,
+  Navbar,
+} from "@/app/_styles/ui/element";
 import { AdminData, FormValue } from "@/app/global/types";
 import {
   useEditAdminDataMutation,
@@ -34,39 +39,31 @@ export default function Settings() {
 
   const setValue = (e: FormValue) => dispatch(SET_VALUE(e));
 
-  if (adminData.isLoading) {
-    return <Loader />;
-  } else {
-    return (
-      <Fragment>
-        <Navbar>
-          <Text>Settings</Text>
-        </Navbar>
-        <Styles>
-          <Form
-            layout="vertical"
-            onFinish={submit}
-            onChange={setValue}
-            initialValues={data}
-          >
-            <Title>Edit admin data</Title>
-            <br />
-            <FormItem node={<AppInput />} name="name" />
-            <FormItem
-              node={<AppPassword />}
-              name="password"
-              isPsw
-            />
-            <FormItem
-              node={
-                <AppButton disabled={isLoading}>
-                  {isLoading ? <LoadingOutlined /> : ""} Submit
-                </AppButton>
-              }
-            />
-          </Form>
-        </Styles>
-      </Fragment>
-    );
-  }
+  return (
+    <Loader is={adminData.isLoading}>
+      <Navbar>
+        <Text>Settings</Text>
+      </Navbar>
+      <Styles>
+        <Form
+          layout="vertical"
+          onFinish={submit}
+          onChange={setValue}
+          initialValues={data}
+        >
+          <Title>Edit admin data</Title>
+          <br />
+          <FormItem node={<AppInput />} name="name" />
+          <FormItem node={<AppPassword />} name="password" isPsw />
+          <FormItem
+            node={
+              <AppButton disabled={isLoading}>
+                {isLoading ? <LoadingOutlined /> : ""} Submit
+              </AppButton>
+            }
+          />
+        </Form>
+      </Styles>
+    </Loader>
+  );
 }
