@@ -78,10 +78,10 @@ export const Navbar = styled.nav`
   }
 `;
 
-export const Inline = styled.div`
+export const Inline = styled.div<{ y: "end" | "start" | "center" }>`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: ${(p) => p.y};
 `;
 
 export const Br = styled.div<{ px: number }>`

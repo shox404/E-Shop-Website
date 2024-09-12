@@ -13,12 +13,36 @@ import {
 } from "@/app/_styles/ui/element";
 import { Text, Thin, Title } from "@/app/_styles/ui/text";
 import { Item } from "@/app/global/types";
-import { SearchOutlined } from "@ant-design/icons";
-import { Carousel, Divider, Image } from "antd";
+import {
+  DeleteOutlined,
+  EditFilled,
+  EllipsisOutlined,
+  SearchOutlined,
+} from "@ant-design/icons";
+import { Carousel, Dropdown, Image, MenuProps } from "antd";
 import { ChangeEvent, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { format } from "@/app/global/utils";
 import Tooltip from "@/app/_components/tooltip";
+
+const drops: MenuProps["items"] = [
+  {
+    label: (
+      <div>
+        <EditFilled /> Edit
+      </div>
+    ),
+    key: "0",
+  },
+  {
+    label: (
+      <div>
+        <DeleteOutlined /> Delete
+      </div>
+    ),
+    key: "1",
+  },
+];
 
 export default function Products() {
   const { items } = useAppSelector((state) => state.items);
@@ -66,17 +90,24 @@ export default function Products() {
                   <Title>
                     <Tooltip>{item.title}</Tooltip>
                   </Title>
-                  <Br px={30} />
+                  <Br px={5} />
                   <Thin>
                     <Tooltip>{item.description}</Tooltip>
                   </Thin>
-                  <Br px={30} />
-                  <Inline>
+                  <Br px={5} />
+                  <Inline y="center">
                     <Text>Price</Text>
                     <Text> $ {format(item.price)}</Text>
                   </Inline>
-                  <Divider type="horizontal" />
-                  <AppButton>Edit</AppButton>
+                  <Br px={5} />
+                  <Dropdown menu={{ items: drops }} trigger={["click"]}>
+                    <Inline y="end">
+                      <Text>Actions</Text>
+                      <AppButton>
+                        <EllipsisOutlined />
+                      </AppButton>
+                    </Inline>
+                  </Dropdown>
                 </div>
               </motion.div>
             ))}

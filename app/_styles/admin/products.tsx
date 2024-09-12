@@ -40,7 +40,8 @@ export const Styles = styled(motion.div)`
         overflow: hidden;
       }
       button {
-        width: 100%;
+        padding: 10px;
+        height: 35px;
       }
     }
   }
