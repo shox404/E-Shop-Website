@@ -70,4 +70,8 @@ export const Navbar = styled.nav`
   background-color: #fff;
   display: flex;
   align-items: center;
+  @media screen and (max-width: 480px) {
+    margin-inline: 0px;
+    width: 100%;
+  }
 `;

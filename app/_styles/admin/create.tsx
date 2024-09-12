@@ -21,4 +21,7 @@ export const Styles = styled.div`
       }
     }
   }
+  @media screen and (max-width: 480px) {
+    padding-inline: 0;
+  }
 `;

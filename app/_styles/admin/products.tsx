@@ -16,12 +16,16 @@ export const Styles = styled.div`
     .images {
       overflow: hidden;
       border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       .image {
         height: 150px;
         display: flex;
         justify-content: center;
         align-items: center;
         object-fit: cover;
+        margin: auto;
         .ant-image,
         img {
           border-radius: 16px;
@@ -31,6 +35,15 @@ export const Styles = styled.div`
     }
     .footer {
       padding: 10px;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    padding-inline: 0;
+    .card {
+      width: 100%;
+      .images .image {
+        height: 200px;
+      }
     }
   }
 `;
