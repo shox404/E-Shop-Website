@@ -77,3 +77,14 @@ export const Navbar = styled.nav`
     width: 100%;
   }
 `;
+
+export const Inline = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const Br = styled.div<{ px: number }>`
+  width: 100%;
+  height: ${(p) => p.px}px;
+`;

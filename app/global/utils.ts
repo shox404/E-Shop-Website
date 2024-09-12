@@ -16,3 +16,5 @@ const categoryOptions = () => {
 };
 
 export const options = categoryOptions();
+
+export const format = (value: number) => Number(value).toLocaleString();

@@ -4,13 +4,21 @@ import Loader from "@/app/_components/loader";
 import { useAppSelector } from "@/app/_store/hooks";
 import { useGetItemQuery } from "@/app/_store/services/items";
 import { Styles } from "@/app/_styles/admin/products";
-import { AppButton, AppInput, Navbar } from "@/app/_styles/ui/element";
+import {
+  AppButton,
+  AppInput,
+  Br,
+  Inline,
+  Navbar,
+} from "@/app/_styles/ui/element";
 import { Text, Thin, Title } from "@/app/_styles/ui/text";
 import { Item } from "@/app/global/types";
 import { SearchOutlined } from "@ant-design/icons";
-import { Carousel, Image } from "antd";
+import { Carousel, Divider, Image } from "antd";
 import { ChangeEvent, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { format } from "@/app/global/utils";
+import Tooltip from "@/app/_components/tooltip";
 
 export default function Products() {
   const { items } = useAppSelector((state) => state.items);
@@ -55,10 +63,20 @@ export default function Products() {
                   </Carousel>
                 </div>
                 <div className="footer">
-                  <Title>{item.title}</Title>
-                  <Thin>{item.description}</Thin>
-                  <Thin>$ {item.price}</Thin>
-                  <AppButton></AppButton>
+                  <Title>
+                    <Tooltip>{item.title}</Tooltip>
+                  </Title>
+                  <Br px={30} />
+                  <Thin>
+                    <Tooltip>{item.description}</Tooltip>
+                  </Thin>
+                  <Br px={30} />
+                  <Inline>
+                    <Text>Price</Text>
+                    <Text> $ {format(item.price)}</Text>
+                  </Inline>
+                  <Divider type="horizontal" />
+                  <AppButton>Edit</AppButton>
                 </div>
               </motion.div>
             ))}

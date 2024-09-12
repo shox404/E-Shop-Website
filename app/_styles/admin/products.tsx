@@ -33,6 +33,15 @@ export const Styles = styled(motion.div)`
     }
     .footer {
       padding: 10px;
+      p {
+        white-space: nowrap;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      button {
+        width: 100%;
+      }
     }
   }
   @media screen and (max-width: 480px) {
