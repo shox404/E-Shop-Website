@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createItem, getItem } from "../services/items";
+import { createItem, deleteItem, editItem, getItem } from "../services/items";
 import { Detail, Item } from "@/app/global/types";
 
 type State = {
@@ -38,6 +38,16 @@ const items = createSlice({
       })
       .addMatcher(getItem.matchFulfilled, (state, { payload }) => {
         state.items = payload;
+      })
+      .addMatcher(editItem.matchFulfilled, (state, { payload }) => {
+        state.items.map((item, index) => {
+          if (payload.id == item.id) state.items.splice(index, 1, payload);
+        });
+      })
+      .addMatcher(deleteItem.matchFulfilled, (state, { payload }) => {
+        state.items.map((item, index) => {
+          if (payload.id == item.id) state.items.splice(index, 1);
+        });
       });
   },
 });

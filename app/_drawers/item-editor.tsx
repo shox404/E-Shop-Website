@@ -27,7 +27,7 @@ const uploadProps: UploadProps = {
   listType: "picture",
 };
 
-export default function ItemEditor() {
+export default function ItemEditor({ data }: { data: Item }) {
   const [visible, setVisible] = useState(false);
   const dispatch = useAppDispatch();
   const { item } = useAppSelector((state) => state.items);

@@ -12,12 +12,17 @@ export const itemsApi = api.injectEndpoints({
     editItem: build.mutation<Item, Item>({
       query: (body) => ({ url: `/items/${body.id}`, method: "PUT", body }),
     }),
-    deleteItem: build.mutation<void, { id: any }>({
+    deleteItem: build.mutation<{ id: any }, { id: any }>({
       query: (id) => ({ url: `/items/${id}`, method: "DELETE" }),
     }),
   }),
 });
 
-export const { useCreateItemMutation, useGetItemQuery } = itemsApi;
+export const {
+  useCreateItemMutation,
+  useGetItemQuery,
+  useEditItemMutation,
+  useDeleteItemMutation,
+} = itemsApi;
 
-export const { createItem, getItem } = itemsApi.endpoints;
+export const { createItem, getItem, editItem, deleteItem } = itemsApi.endpoints;

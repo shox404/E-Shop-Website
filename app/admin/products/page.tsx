@@ -2,7 +2,10 @@
 
 import Loader from "@/app/_components/loader";
 import { useAppSelector } from "@/app/_store/hooks";
-import { useGetItemQuery } from "@/app/_store/services/items";
+import {
+  useDeleteItemMutation,
+  useGetItemQuery,
+} from "@/app/_store/services/items";
 import { Styles } from "@/app/_styles/admin/products";
 import {
   AppButton,
@@ -15,7 +18,6 @@ import { Text, Thin, Title } from "@/app/_styles/ui/text";
 import { Item } from "@/app/global/types";
 import {
   DeleteOutlined,
-  EditFilled,
   EllipsisOutlined,
   PlusOutlined,
   SearchOutlined,
@@ -28,26 +30,26 @@ import Tooltip from "@/app/_components/tooltip";
 import ItemEditor from "@/app/_drawers/item-editor";
 import { useRouter } from "next/navigation";
 
-const drops: MenuProps["items"] = [
-  {
-    label: <ItemEditor />,
-    key: "0",
-  },
-  {
-    label: (
-      <div>
-        <DeleteOutlined /> Delete
-      </div>
-    ),
-    key: "1",
-  },
-];
-
 export default function Products() {
   const { items } = useAppSelector((state) => state.items);
   const { isLoading } = useGetItemQuery();
   const [search, setSearch] = useState("");
+  const [deleteItem] = useDeleteItemMutation();
   const router = useRouter();
+
+  const drops = (data: Item) => {
+    return [
+      { label: <ItemEditor data={data} />, key: "0" },
+      {
+        label: (
+          <div onClick={() => deleteItem({ id: data.id })}>
+            <DeleteOutlined /> Delete
+          </div>
+        ),
+        key: "1",
+      },
+    ];
+  };
 
   const useSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -107,7 +109,7 @@ export default function Products() {
                     <Text> $ {format(item.price)}</Text>
                   </Inline>
                   <Br px={5} />
-                  <Dropdown menu={{ items: drops }} trigger={["click"]}>
+                  <Dropdown menu={{ items: drops(item) }} trigger={["click"]}>
                     <Inline y="end">
                       <Text>Actions</Text>
                       <AppButton>
