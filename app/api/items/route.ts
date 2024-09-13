@@ -10,7 +10,7 @@ export async function GET() {
     const data = docs.map((doc) => ({ id: doc.id, ...doc.data() }));
     return reply(data, 200);
   } catch {
-    return reply({ message: "Server error" }, 500);
+    return reply({ msg: "Server error" }, 500);
   }
 }
 

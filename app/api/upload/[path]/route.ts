@@ -10,7 +10,7 @@ export async function POST(
   const formData = await request.formData();
   const file = formData.get("file");
   if (!file || !(file instanceof Blob)) {
-    return reply({ message: "No file uploaded" }, 400);
+    return reply({ msg: "No file uploaded" }, 400);
   }
   const id = Math.floor(Date.now() * Math.random() * 1000);
   const storageRef = ref(storage, `${path}/${id + file.name}`);

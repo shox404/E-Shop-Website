@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 
 export type AdminData = { name: string; password: string };
 
-export type IncomingMessage = { message: string };
+export type IncomingMessage = { msg: string };
 
 export type CurrentAdminData = { name: string; password?: string };
 

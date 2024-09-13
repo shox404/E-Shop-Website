@@ -17,16 +17,16 @@ export async function GET(_request: NextRequest) {
 export async function POST(request: NextRequest) {
   const cookieStore = cookies();
   const { name, password } = (await request.json()) as AdminData;
-  if (!name || !password) return reply({ message: "Enter details!" }, 400);
+  if (!name || !password) return reply({ msg: "Enter details!" }, 400);
   const data = (await getDoc(doc(db, "app", "admin"))).data() as AdminData;
   const compare = await bcrypt.compare(password, data.password);
   if (data.name === name && compare) {
     const token = jwt.sign(data, process.env.JWT_SECRET_KEY!);
     cookieStore.set("admin-token", token, { expires });
   } else {
-    return reply({ message: "Incorrect password or name!" }, 401);
+    return reply({ msg: "Incorrect password or name!" }, 401);
   }
-  return reply({ message: "Successfully logged in." }, 200);
+  return reply({ msg: "Successfully logged in." }, 200);
 }
 
 export async function PUT(request: NextRequest) {
@@ -37,5 +37,5 @@ export async function PUT(request: NextRequest) {
   await updateDoc(doc(db, "app", "admin"), { ...data, password: secured });
   const token = jwt.sign(data, process.env.JWT_SECRET_KEY!);
   cookieStore.set("admin-token", token, { expires });
-  return reply({ message: "Successfully updated." }, 200);
+  return reply({ msg: "Successfully updated." }, 200);
 }

@@ -2,15 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import { CurrentAdminData, FormValue, PayloadMsg } from "@/app/global/types";
 import { message } from "antd";
 import { loginAdmin, getAdminData, editAdminData } from "../services/admin";
-import { ChangeEvent } from "react";
 
 type State = { data: CurrentAdminData };
 
+const initialState: State = {
+  data: { name: "", password: "" },
+};
+
 const admin = createSlice({
   name: "admin",
-  initialState: {
-    data: { name: "", password: "" },
-  } as State,
+  initialState,
   reducers: {
     SET_VALUE: (state, { payload }: { payload: FormValue }) => {
       if (payload.target.id === "name" || payload.target.id === "password")
@@ -20,7 +21,7 @@ const admin = createSlice({
   extraReducers(builder) {
     builder
       .addMatcher(loginAdmin.matchFulfilled, (_, { payload }: PayloadMsg) => {
-        message.success(payload.message);
+        message.success(payload.msg);
       })
       .addMatcher(
         getAdminData.matchFulfilled,
@@ -31,7 +32,7 @@ const admin = createSlice({
       .addMatcher(
         editAdminData.matchFulfilled,
         (_, { payload }: PayloadMsg) => {
-          message.success(payload.message);
+          message.success(payload.msg);
         }
       );
   },
