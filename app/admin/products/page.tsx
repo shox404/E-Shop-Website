@@ -22,7 +22,7 @@ import {
   PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Carousel, Dropdown, Flex, Image, MenuProps } from "antd";
+import { Carousel, Dropdown, Flex, Image, MenuProps, Popconfirm } from "antd";
 import { ChangeEvent, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { format } from "@/app/global/utils";
@@ -32,19 +32,29 @@ import { useRouter } from "next/navigation";
 
 export default function Products() {
   const { items } = useAppSelector((state) => state.items);
-  const { isLoading } = useGetItemQuery();
+  const item = useGetItemQuery();
   const [search, setSearch] = useState("");
-  const [deleteItem] = useDeleteItemMutation();
+  const [deleteItem, { error, isLoading }] = useDeleteItemMutation();
+
   const router = useRouter();
 
   const drops = (data: Item) => {
     return [
-      { label: <ItemEditor data={data} />, key: "0" },
+      {
+        label: <ItemEditor data={data} />,
+        key: "0",
+      },
       {
         label: (
-          <div onClick={() => deleteItem({ id: data.id })}>
-            <DeleteOutlined /> Delete
-          </div>
+          <Inline y="start">
+            <Popconfirm
+              title="Delete?"
+              onConfirm={() => deleteItem({ id: data.id })}
+            >
+              <DeleteOutlined /> Delete
+            </Popconfirm>
+            .
+          </Inline>
         ),
         key: "1",
       },
@@ -58,7 +68,7 @@ export default function Products() {
   const goCreate = () => router.push("/admin/create");
 
   return (
-    <Loader is={isLoading}>
+    <Loader is={item.isLoading}>
       <Navbar>
         <Text>Products</Text>
         <Flex gap={10}>

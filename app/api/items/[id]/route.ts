@@ -19,6 +19,8 @@ export async function DELETE(
 ) {
   await verify(request);
   const data = await request.json();
+  console.log(data);
+  
   await deleteDoc(doc(db, "items", id));
   return reply({ id }, 204);
 }

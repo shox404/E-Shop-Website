@@ -10,6 +10,7 @@ import {
   AppInput,
   AppSelect,
   AppTextArea,
+  Inline,
 } from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
 import { Detail, FormValue, Item } from "@/app/global/types";
@@ -72,9 +73,12 @@ export default function ItemEditor({ data }: { data: Item }) {
 
   return (
     <Fragment>
-      <div onClick={showDrawer}>
-        <EditFilled /> Edit
-      </div>
+      <Inline y="start" onClick={showDrawer}>
+        <div>
+          <EditFilled /> Edit
+        </div>
+        .
+      </Inline>
       <Drawer
         title="Edit Item"
         onClose={onClose}
