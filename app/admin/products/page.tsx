@@ -73,12 +73,13 @@ export default function Products() {
     <Loader is={item.isLoading}>
       <Navbar>
         <Text>Products</Text>
-        <Flex gap={10}>
+        <Flex gap={10} className="line">
           <AppInput
             prefix={<SearchOutlined />}
             placeholder="Search"
             width={200}
             onChange={useSearch}
+            className="input"
           />
           <AppButton onClick={goCreate}>
             Create <PlusOutlined />

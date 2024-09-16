@@ -78,6 +78,19 @@ export const Navbar = styled.nav`
   @media screen and (max-width: 480px) {
     margin-inline: 0px;
     width: 100%;
+    padding: 5px 10px;
+    flex-wrap: wrap;
+    button,
+    .ant-input-affix-wrapper {
+      height: 35px;
+      padding: 10px;
+    }
+    .line {
+      width: 100%;
+      .ant-input-affix-wrapper {
+        width: 100%;
+      }
+    }
   }
 `;
 
