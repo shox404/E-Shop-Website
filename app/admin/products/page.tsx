@@ -46,15 +46,17 @@ export default function Products() {
       },
       {
         label: (
-          <Inline y="start">
-            <Popconfirm
-              title="Delete?"
-              onConfirm={() => deleteItem({ id: data.id })}
-            >
-              <DeleteOutlined /> Delete
-            </Popconfirm>
-            .
-          </Inline>
+          <Popconfirm
+            title="Delete?"
+            onConfirm={() => deleteItem({ id: data.id })}
+          >
+            <Inline y="start">
+              <div>
+                <DeleteOutlined /> Delete
+              </div>
+              .
+            </Inline>
+          </Popconfirm>
         ),
         key: "1",
       },
@@ -99,7 +101,7 @@ export default function Products() {
                 transition={{ duration: 0.3 }}
               >
                 <div className="images">
-                  <Carousel arrows>
+                  <Carousel arrows={item.images.length > 1}>
                     {item.images.map((art, index) => (
                       <Image src={art} key={index} className="image" />
                     ))}

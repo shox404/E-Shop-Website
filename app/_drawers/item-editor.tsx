@@ -117,7 +117,7 @@ export default function ItemEditor({ data }: { data: Item }) {
           onChange={({ target: { id, value } }: FormValue) =>
             setValue({ key: id, value })
           }
-          initialValues={item}
+          initialValues={data}
         >
           <FormItem node={<AppInput />} name="title" />
           <FormItem node={<AppSelect options={options} />} name="category" />

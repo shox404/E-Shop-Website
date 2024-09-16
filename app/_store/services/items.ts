@@ -13,7 +13,7 @@ export const itemsApi = api.injectEndpoints({
       query: (body) => ({ url: `/items/${body.id}`, method: "PUT", body }),
     }),
     deleteItem: build.mutation<{ id: any }, { id: any }>({
-      query: (id) => ({ url: `/items/${id}`, method: "DELETE" }),
+      query: (data) => ({ url: `/items/${data.id}`, method: "DELETE" }),
     }),
   }),
 });
