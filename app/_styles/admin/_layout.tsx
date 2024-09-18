@@ -71,6 +71,7 @@ export const Content = styled.div`
     margin-left: 300px;
   }
   @media screen and (max-width: 480px) {
+    padding-top: 80px;
     &.open {
       width: 100%;
       margin-left: 0;

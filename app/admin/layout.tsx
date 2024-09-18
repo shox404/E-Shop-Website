@@ -40,12 +40,12 @@ const links = [
   },
 ];
 
-interface AdminProps {
+interface Props {
   children: ReactNode;
-  dashboard: boolean; // Assuming this is the missing property
+  dashboard: boolean;
 }
 
-export default function Admin({ children, dashboard }: AdminProps) {
+export default function Admin({ children, dashboard }: Props) {
   const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(true);
   const router = useRouter();
   const path = usePathname();

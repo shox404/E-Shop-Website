@@ -23,5 +23,8 @@ export const Styles = styled.div`
   }
   @media screen and (max-width: 480px) {
     padding-inline: 0;
+    .content {
+      padding: 15px 25px 10px 25px;
+    }
   }
 `;

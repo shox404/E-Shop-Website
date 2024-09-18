@@ -19,4 +19,10 @@ export const Styles = styled.div`
       margin-top: 20px;
     }
   }
+  @media screen and (max-width: 480px) {
+    width: 100%;
+    form {
+      width: 100%;
+    }
+  }
 `;
