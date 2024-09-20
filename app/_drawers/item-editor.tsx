@@ -2,9 +2,8 @@
 
 import FormItem from "@/app/_components/form-item";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
-import { CLEAR_ITEM, SET_ITEM } from "@/app/_store/reducers/items";
-import { useCreateItemMutation } from "@/app/_store/services/items";
-import { Styles } from "@/app/_styles/admin/create";
+import { SET_EDIT, EQUAL_EDIT } from "@/app/_store/reducers/items";
+import { useEditItemMutation } from "@/app/_store/services/items";
 import {
   AppButton,
   AppInput,
@@ -12,7 +11,6 @@ import {
   AppTextArea,
   Inline,
 } from "@/app/_styles/ui/element";
-import { Text, Title } from "@/app/_styles/ui/text";
 import { Detail, FormValue, Item } from "@/app/global/types";
 import { options, errorMsg } from "@/app/global/utils";
 import { EditFilled, InboxOutlined, LoadingOutlined } from "@ant-design/icons";
@@ -31,22 +29,25 @@ const uploadProps: UploadProps = {
 export default function ItemEditor({ data }: { data: Item }) {
   const [visible, setVisible] = useState(false);
   const dispatch = useAppDispatch();
-  const { item } = useAppSelector((state) => state.items);
-  const [create, { isLoading, error }] = useCreateItemMutation();
+  const { edit } = useAppSelector((state) => state.items);
+  const [editItem, { isLoading, error }] = useEditItemMutation();
   const router = useRouter();
 
+  useEffect(() => {
+    dispatch(SET_EDIT(data));
+  }, [data]);
   useEffect(() => errorMsg(error), [error]);
 
   const showDrawer = () => setVisible(true);
   const onClose = () => setVisible(false);
 
   const submit = async () => {
-    if (item.images !== undefined) {
-      await create(item)
+    if (edit.images !== undefined) {
+      await editItem(edit)
         .unwrap()
         .then(() => {
           router.push("/admin/products");
-          dispatch(CLEAR_ITEM());
+          dispatch(SET_EDIT({}));
           onClose();
         });
     } else {
@@ -54,7 +55,7 @@ export default function ItemEditor({ data }: { data: Item }) {
     }
   };
 
-  const setValue = (e: Detail) => dispatch(SET_ITEM(e));
+  const setValue = (e: Detail) => dispatch(EQUAL_EDIT(e));
 
   const upload = (info: any) => {
     const { status, name } = info.file;
@@ -97,7 +98,7 @@ export default function ItemEditor({ data }: { data: Item }) {
         <Upload.Dragger
           {...uploadProps}
           onChange={upload}
-          defaultFileList={item.images}
+          defaultFileList={edit.images}
         >
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
@@ -117,7 +118,7 @@ export default function ItemEditor({ data }: { data: Item }) {
           onChange={({ target: { id, value } }: FormValue) =>
             setValue({ key: id, value })
           }
-          initialValues={data}
+          initialValues={edit}
         >
           <FormItem node={<AppInput />} name="title" />
           <FormItem node={<AppSelect options={options} />} name="category" />

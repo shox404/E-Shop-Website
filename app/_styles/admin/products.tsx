@@ -17,6 +17,9 @@ export const Styles = styled(motion.div)`
     .images {
       overflow: hidden;
       border-radius: 16px;
+      .ant-image {
+        min-width: 100%;
+      }
       .image {
         height: 150px;
         display: flex;
@@ -24,7 +27,6 @@ export const Styles = styled(motion.div)`
         align-items: center;
         object-fit: cover;
         margin: auto;
-        .ant-image,
         img {
           border-radius: 16px;
           height: 100%;

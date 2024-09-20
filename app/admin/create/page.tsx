@@ -2,7 +2,7 @@
 
 import FormItem from "@/app/_components/form-item";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
-import { CLEAR_ITEM, SET_ITEM } from "@/app/_store/reducers/items";
+import { CLEAR_ITEM, EQUAL_ITEM } from "@/app/_store/reducers/items";
 import { useCreateItemMutation } from "@/app/_store/services/items";
 import { Styles } from "@/app/_styles/admin/create";
 import {
@@ -49,7 +49,7 @@ export default function Create() {
     }
   };
 
-  const setValue = (e: Detail) => dispatch(SET_ITEM(e));
+  const setValue = (e: Detail) => dispatch(EQUAL_ITEM(e));
 
   const upload = (info: any) => {
     const { status, name } = info.file;
