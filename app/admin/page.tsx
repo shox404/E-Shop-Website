@@ -1,12 +1,21 @@
 "use client";
 
 import Loader from "@/app/_components/loader";
-import Box from "./@dashboard/box";
+import Box from "./dashboard-blocks/box";
 import { Styles } from "@/app/_styles/admin/dashboard";
 import { Navbar } from "@/app/_styles/ui/element";
 import { Text } from "@/app/_styles/ui/text";
+import { ProductFilled } from "@ant-design/icons";
+import { useAppSelector } from "../_store/hooks";
+import { useGetItemQuery } from "../_store/services/items";
 
 export default function Dashboard() {
+  const { items } = useAppSelector((state) => state);
+
+  const itmLen = items.items.length;
+
+  useGetItemQuery();
+
   return (
     <Loader is={false}>
       <Navbar>
@@ -14,9 +23,11 @@ export default function Dashboard() {
       </Navbar>
       <Styles>
         <div className="boxes">
-          <Box />
-          <Box />
-          <Box />
+          <Box
+            icon={<ProductFilled />}
+            title={`${itmLen} product${itmLen <= 1 ? "" : "s"}`}
+            text="All shop items"
+          />
         </div>
       </Styles>
     </Loader>

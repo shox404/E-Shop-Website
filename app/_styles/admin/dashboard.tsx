@@ -14,8 +14,19 @@ export const Styles = styled.div`
       background-color: #fff;
       display: flex;
       align-items: center;
-      padding: 15px;
+      gap: 10px;
+      padding: 25px;
       border-radius: 20px;
+      .icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: gold;
+        font-size: 25px;
+      }
     }
   }
   @media screen and (max-width: 480px) {

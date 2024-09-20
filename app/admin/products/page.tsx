@@ -23,9 +23,9 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import { Carousel, Dropdown, Flex, Image, MenuProps, Popconfirm } from "antd";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { format } from "@/app/global/utils";
+import { errorMsg, format } from "@/app/global/utils";
 import Tooltip from "@/app/_components/tooltip";
 import ItemEditor from "@/app/_drawers/item-editor";
 import { useRouter } from "next/navigation";
@@ -34,7 +34,9 @@ export default function Products() {
   const { items } = useAppSelector((state) => state.items);
   const item = useGetItemQuery();
   const [search, setSearch] = useState("");
-  const [deleteItem, { error, isLoading }] = useDeleteItemMutation();
+  const [deleteItem, { error }] = useDeleteItemMutation();
+
+  useEffect(() => errorMsg(error), [error]);
 
   const router = useRouter();
 
