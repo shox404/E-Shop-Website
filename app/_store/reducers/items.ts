@@ -4,25 +4,19 @@ import { Detail, Item } from "@/app/global/types";
 
 type State = { item: Item; edit: Item; items: Item[] };
 
+const itemSchema: Item = {
+  images: [],
+  title: "",
+  price: 0,
+  description: "",
+  active: false,
+  amount: 0,
+  category: "Item",
+};
+
 const initialState: State = {
-  item: {
-    images: [],
-    title: "",
-    price: 0,
-    description: "",
-    active: false,
-    amount: 0,
-    category: "Item",
-  },
-  edit: {
-    images: [],
-    title: "",
-    price: 0,
-    description: "",
-    active: false,
-    amount: 0,
-    category: "Item",
-  },
+  item: itemSchema,
+  edit: itemSchema,
   items: [],
 };
 

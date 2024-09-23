@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CurrentAdminData, FormValue, PayloadMsg } from "@/app/global/types";
+import { CurrentAdminData, PayloadMsg } from "@/app/global/types";
 import { message } from "antd";
 import { loginAdmin, getAdminData, editAdminData } from "../services/admin";
 
@@ -14,7 +14,7 @@ const admin = createSlice({
   initialState,
   reducers: {
     SET_VALUE: (state, { payload }) => {
-      const { id, value } = payload.target;
+      const { id, value } = payload?.target;
       state.data = { ...state.data, [id]: value };
     },
   },
