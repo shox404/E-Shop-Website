@@ -37,7 +37,7 @@ export default function Login() {
         <FormItem
           node={
             <AppButton disabled={isLoading}>
-              {isLoading ? <LoadingOutlined /> : ""}Submit
+              {isLoading ? <LoadingOutlined /> : ""} Submit
             </AppButton>
           }
         />

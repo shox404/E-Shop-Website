@@ -19,7 +19,8 @@ const category = createSlice({
   initialState,
   reducers: {
     SET_CATEGORY: (state, { payload }) => {
-      state.value = { ...state.value, [payload.key]: payload.value };
+      const { id, value } = payload.target;
+      state.value = { ...state.value, [id]: value };
     },
   },
   extraReducers(builder) {

@@ -13,9 +13,9 @@ const admin = createSlice({
   name: "admin",
   initialState,
   reducers: {
-    SET_VALUE: (state, { payload }: { payload: FormValue }) => {
-      if (payload.target.id === "name" || payload.target.id === "password")
-        state.data[payload.target.id] = payload.target.value;
+    SET_VALUE: (state, { payload }) => {
+      const { id, value } = payload.target;
+      state.data = { ...state.data, [id]: value };
     },
   },
   extraReducers(builder) {

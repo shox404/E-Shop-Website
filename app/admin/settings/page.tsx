@@ -62,9 +62,9 @@ export default function Settings() {
       });
   };
 
-  const setValue = (e: FormValue) => dispatch(SET_VALUE(e));
+  const setValue = (value: FormValue) => dispatch(SET_VALUE(value));
 
-  const setCategoryValue = (e: Detail) => dispatch(SET_CATEGORY(e));
+  const setCategoryValue = (value: FormValue) => dispatch(SET_CATEGORY(value));
 
   const drops = (data: Category) => {
     return [
@@ -118,10 +118,8 @@ export default function Settings() {
         <Form
           layout="vertical"
           onFinish={submitCategory}
+          onChange={setCategoryValue}
           initialValues={value}
-          onChange={({ target: { id, value } }: FormValue) =>
-            setCategoryValue({ key: id, value })
-          }
         >
           <Title>Categories</Title>
           <br />
