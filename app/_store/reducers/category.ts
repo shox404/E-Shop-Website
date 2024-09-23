@@ -9,10 +9,7 @@ import { Category } from "@/app/global/types";
 
 type State = { category: Category[]; value: Category };
 
-const initialState: State = {
-  category: [],
-  value: { key: "" },
-};
+const initialState: State = { category: [], value: { key: "" } };
 
 const category = createSlice({
   name: "category",
@@ -21,6 +18,9 @@ const category = createSlice({
     SET_CATEGORY: (state, { payload }) => {
       const { id, value } = payload.target;
       state.value = { ...state.value, [id]: value };
+    },
+    EMPTY_CATEGORY: (state) => {
+      state.value = initialState.value;
     },
   },
   extraReducers(builder) {
@@ -44,5 +44,5 @@ const category = createSlice({
   },
 });
 
-export const { SET_CATEGORY } = category.actions;
+export const { SET_CATEGORY, EMPTY_CATEGORY } = category.actions;
 export default category.reducer;

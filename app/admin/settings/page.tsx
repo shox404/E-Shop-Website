@@ -31,14 +31,14 @@ import {
   useDeleteCategoryMutation,
   useGetCategoryQuery,
 } from "@/app/_store/services/category";
-import { SET_CATEGORY } from "@/app/_store/reducers/category";
+import { EMPTY_CATEGORY, SET_CATEGORY } from "@/app/_store/reducers/category";
 
 export default function Settings() {
   const dispatch = useAppDispatch();
   const adminData = useGetAdminDataQuery();
   const [edit, { error, isLoading }] = useEditAdminDataMutation();
   const [deleteCategory] = useDeleteCategoryMutation();
-  const [createCategory] = useCreateCategoryMutation();
+  const [createCategory, moreCategory] = useCreateCategoryMutation();
   const {
     admin: { data },
     category: { category, value },
@@ -57,9 +57,7 @@ export default function Settings() {
   const submitCategory = async (value: Category) => {
     await createCategory(value)
       .unwrap()
-      .then(() => {
-        dispatch(SET_CATEGORY({ key: "key", value: "" }));
-      });
+      .then(() => dispatch(EMPTY_CATEGORY()));
   };
 
   const setValue = (value: FormValue) => dispatch(SET_VALUE(value));
@@ -126,8 +124,8 @@ export default function Settings() {
           <FormItem node={<AppInput />} name="key" />
           <FormItem
             node={
-              <AppButton disabled={false}>
-                {false ? <LoadingOutlined /> : ""} Create
+              <AppButton disabled={moreCategory.isLoading}>
+                {moreCategory.isLoading ? <LoadingOutlined /> : ""} Create
               </AppButton>
             }
           />
