@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
 import { SET_EDIT, EQUAL_EDIT } from "@/app/_store/reducers/items";
 import { useEditItemMutation } from "@/app/_store/services/items";
 import {
-  AppButton,
   AppInput,
   AppSelect,
   AppTextArea,
@@ -13,10 +12,12 @@ import {
 } from "@/app/_styles/ui/element";
 import { Detail, FormValue, Item } from "@/app/global/types";
 import { options, errorMsg } from "@/app/global/utils";
-import { EditFilled, InboxOutlined, LoadingOutlined } from "@ant-design/icons";
-import { Drawer, Flex, Form, message, Upload, UploadProps } from "antd";
+import { EditFilled, InboxOutlined } from "@ant-design/icons";
+import { Drawer, Form, message, Upload, UploadProps } from "antd";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
+import FormFooter from "@/app/_components/form-footer";
+import DropItem from "../_components/drop-item";
 
 const uploadProps: UploadProps = {
   name: "file",
@@ -28,9 +29,9 @@ const uploadProps: UploadProps = {
 
 export default function ItemEditor({ data }: { data: Item }) {
   const [visible, setVisible] = useState(false);
-  const dispatch = useAppDispatch();
-  const { edit } = useAppSelector((state) => state.items);
   const [editItem, { isLoading, error }] = useEditItemMutation();
+  const { edit } = useAppSelector((state) => state.items);
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   useEffect(() => {
@@ -38,8 +39,7 @@ export default function ItemEditor({ data }: { data: Item }) {
   }, [data]);
   useEffect(() => errorMsg(error), [error]);
 
-  const showDrawer = () => setVisible(true);
-  const onClose = () => setVisible(false);
+  const toggle = () => setVisible(!visible);
 
   const submit = async () => {
     if (edit.images !== undefined) {
@@ -48,7 +48,7 @@ export default function ItemEditor({ data }: { data: Item }) {
         .then(() => {
           router.push("/admin/products");
           dispatch(SET_EDIT({}));
-          onClose();
+          toggle();
         });
     } else {
       message.warning("Please upload images");
@@ -74,26 +74,14 @@ export default function ItemEditor({ data }: { data: Item }) {
 
   return (
     <Fragment>
-      <Inline y="start" onClick={showDrawer}>
-        <div>
-          <EditFilled /> Edit
-        </div>
-        .
-      </Inline>
+      <DropItem onClick={toggle}>
+        <EditFilled /> Edit
+      </DropItem>
       <Drawer
         title="Edit Item"
-        onClose={onClose}
+        onClose={toggle}
         open={visible}
-        footer={
-          <Flex justify="end">
-            <AppButton onClick={onClose} style={{ marginRight: 8 }}>
-              Cancel
-            </AppButton>
-            <AppButton onClick={submit} disabled={isLoading}>
-              {isLoading ? <LoadingOutlined /> : ""} Submit
-            </AppButton>
-          </Flex>
-        }
+        footer={<FormFooter act={submit} hide={toggle} loading={isLoading} />}
       >
         <Upload.Dragger
           {...uploadProps}

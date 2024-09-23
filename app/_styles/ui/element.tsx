@@ -98,6 +98,7 @@ export const Inline = styled.div<{ y: "end" | "start" | "center" }>`
   display: flex;
   justify-content: space-between;
   align-items: ${(p) => p.y};
+  gap: 10px;
 `;
 
 export const Br = styled.div<{ px: number }>`

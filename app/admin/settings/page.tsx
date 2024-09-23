@@ -32,6 +32,8 @@ import {
   useGetCategoryQuery,
 } from "@/app/_store/services/category";
 import { EMPTY_CATEGORY, SET_CATEGORY } from "@/app/_store/reducers/category";
+import CategoryEditor from "@/app/_drawers/category-editor";
+import DropItem from "@/app/_components/drop-item";
 
 export default function Settings() {
   const dispatch = useAppDispatch();
@@ -67,7 +69,7 @@ export default function Settings() {
   const drops = (data: Category) => {
     return [
       {
-        label: "<ItemEditor data={data} />",
+        label: <CategoryEditor data={data} />,
         key: "0",
       },
       {
@@ -76,12 +78,9 @@ export default function Settings() {
             title="Delete?"
             onConfirm={() => deleteCategory({ id: data.id })}
           >
-            <Inline y="start">
-              <div>
-                <DeleteOutlined /> Delete
-              </div>
-              .
-            </Inline>
+            <DropItem>
+              <DeleteOutlined /> Delete
+            </DropItem>
           </Popconfirm>
         ),
         key: "1",
