@@ -22,7 +22,7 @@ import {
   PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Carousel, Dropdown, Flex, Image, MenuProps, Popconfirm } from "antd";
+import { Carousel, Dropdown, Flex, Image, Popconfirm } from "antd";
 import { ChangeEvent, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { errorMsg, format } from "@/app/global/utils";

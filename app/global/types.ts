@@ -17,9 +17,11 @@ export type Item = {
   description: string;
   active: boolean;
   amount: number;
-  category: "Item" | "Meal"
+  category: "Item" | "Meal";
 };
 
 export type Detail = { key: string; value: any };
 
 export type FormValue = ChangeEvent<HTMLFormElement>;
+
+export type Category = { id?: string; key: string };
