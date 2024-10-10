@@ -124,6 +124,11 @@ export default function Products() {
                     <Text> $ {format(item.price)}</Text>
                   </Inline>
                   <Br px={5} />
+                  <Inline y="center">
+                    <Text>Amount</Text>
+                    <Text>{format(item.amount)}</Text>
+                  </Inline>
+                  <Br px={5} />
                   <Dropdown menu={{ items: drops(item) }} trigger={["click"]}>
                     <Inline y="end">
                       <Text>Actions</Text>
