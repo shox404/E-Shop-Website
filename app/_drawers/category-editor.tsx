@@ -1,12 +1,12 @@
 import { Form, Modal } from "antd";
-import { AppButton, AppInput, Inline } from "../_styles/ui/element";
-import FormItem from "../_components/form-item";
 import { Fragment, useEffect, useState } from "react";
 import { EditFilled } from "@ant-design/icons";
-import FormFooter from "../_components/form-footer";
+import { AppInput } from "../_styles/ui/element";
 import { Category } from "../global/types";
 import { useEditCategoryMutation } from "../_store/services/category";
 import { errorMsg } from "../global/utils";
+import FormItem from "../_components/form-item";
+import FormFooter from "../_components/form-footer";
 import DropItem from "../_components/drop-item";
 
 export default function CategoryEditor({ data }: { data: Category }) {
@@ -27,6 +27,7 @@ export default function CategoryEditor({ data }: { data: Category }) {
       <Modal
         title="Edit category"
         open={visible}
+        onCancel={toggle}
         footer={<FormFooter act={submit} hide={toggle} loading={isLoading} />}
       >
         <Form
@@ -36,7 +37,6 @@ export default function CategoryEditor({ data }: { data: Category }) {
           initialValues={data}
         >
           <FormItem node={<AppInput />} name="key" />
-          <FormItem node={<AppButton />} />
         </Form>
       </Modal>
     </Fragment>

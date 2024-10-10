@@ -78,7 +78,7 @@ export default function Settings() {
             title="Delete?"
             onConfirm={() => deleteCategory({ id: data.id })}
           >
-            <DropItem>
+            <DropItem onClick={() => null}>
               <DeleteOutlined /> Delete
             </DropItem>
           </Popconfirm>
