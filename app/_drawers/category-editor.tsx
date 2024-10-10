@@ -11,13 +11,16 @@ import DropItem from "../_components/drop-item";
 
 export default function CategoryEditor({ data }: { data: Category }) {
   const [visible, setVisible] = useState(false);
+  const [ctg, setCtg] = useState<string>("");
   const [edit, { isLoading, error }] = useEditCategoryMutation();
 
   useEffect(() => errorMsg(error), [error]);
 
   const toggle = () => setVisible(!visible);
 
-  const submit = () => null;
+  const submit = async () => {
+    await edit({ ...data, key: ctg });
+  };
 
   return (
     <Fragment>
@@ -30,13 +33,11 @@ export default function CategoryEditor({ data }: { data: Category }) {
         onCancel={toggle}
         footer={<FormFooter act={submit} hide={toggle} loading={isLoading} />}
       >
-        <Form
-          layout="vertical"
-          onFinish={submit}
-          // onChange={}
-          initialValues={data}
-        >
-          <FormItem node={<AppInput />} name="key" />
+        <Form layout="vertical" onFinish={submit} initialValues={data}>
+          <FormItem
+            node={<AppInput onChange={(e) => setCtg(e.target.value)} />}
+            name="key"
+          />
         </Form>
       </Modal>
     </Fragment>

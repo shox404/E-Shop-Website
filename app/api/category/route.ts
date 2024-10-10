@@ -17,6 +17,6 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   await verify(request);
   const data = await request.json();
-  await addDoc(collection(db, "category"), data);
-  return reply(data, 201);
+  const added = await addDoc(collection(db, "category"), data);
+  return reply({ ...data, id: added.id }, 201);
 }

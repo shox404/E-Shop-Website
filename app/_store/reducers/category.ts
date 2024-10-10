@@ -20,7 +20,7 @@ const category = createSlice({
       state.value = { ...state.value, [id]: value };
     },
     EMPTY_CATEGORY: (state) => {
-      state.value.key = initialState.value.key;
+      state.value = { key: "" };
     },
   },
   extraReducers(builder) {
