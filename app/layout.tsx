@@ -6,7 +6,7 @@ import "./global/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = { title: "E Shop" };
+export const metadata: Metadata = { title: "Shop" };
 
 export default function RootLayout({
   children,

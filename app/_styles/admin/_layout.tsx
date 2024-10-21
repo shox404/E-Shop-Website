@@ -60,7 +60,7 @@ export const Item = styled.div`
 `;
 
 export const Content = styled.div`
-  background-color: #d6d6d6;
+  background-color: #f0f0f0;
   color: #181818;
   width: 100%;
   padding: 15px;
