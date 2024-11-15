@@ -2,6 +2,7 @@
 
 import Loader from "@/app/_components/loader";
 import Box from "./dashboard-blocks/box";
+import Products from "./dashboard-blocks/products";
 import { Styles } from "@/app/_styles/admin/dashboard";
 import { Navbar } from "@/app/_styles/ui/element";
 import { Text } from "@/app/_styles/ui/text";
@@ -28,6 +29,19 @@ export default function Dashboard() {
             title={`${itmLen} product${itmLen <= 1 ? "" : "s"}`}
             text="All shop items"
           />
+          <Box
+            icon={<ProductFilled />}
+            title={`${itmLen} product${itmLen <= 1 ? "" : "s"}`}
+            text="Sold products today"
+          />
+          <Box
+            icon={<ProductFilled />}
+            title={`${itmLen} product${itmLen <= 1 ? "" : "s"}`}
+            text="All shop items"
+          />
+        </div>
+        <div className="blocks">
+          <Products />
         </div>
       </Styles>
     </Loader>

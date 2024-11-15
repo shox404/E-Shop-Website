@@ -1,4 +1,5 @@
 import { message } from "antd";
+import {Category} from "@/app/global/types";
 
 export const errorMsg = (error: any) => {
   if (error) {
@@ -10,11 +11,8 @@ export const errorMsg = (error: any) => {
   }
 };
 
-const categoryOptions = () => {
-  const category = ["item", "meal"];
-  return category.map((e) => ({ value: e[0].toUpperCase() + e.slice(1) }));
+export const categoryOptions = (array:Category[]) => {
+  return array.map((e:any) => ({ value: e.key[0].toUpperCase() + e.key.slice(1) }));
 };
-
-export const options = categoryOptions();
 
 export const format = (value: number) => Number(value).toLocaleString();

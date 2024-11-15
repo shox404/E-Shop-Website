@@ -11,11 +11,12 @@ import {
   Inline,
 } from "@/app/_styles/ui/element";
 import { Detail, FormValue, Item } from "@/app/global/types";
-import { options, errorMsg } from "@/app/global/utils";
+import { errorMsg, categoryOptions } from "@/app/global/utils";
 import { EditFilled, InboxOutlined } from "@ant-design/icons";
 import { Drawer, Form, message, Upload, UploadProps } from "antd";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
+import { useGetCategoryQuery } from "@/app/_store/services/category";
 import FormFooter from "@/app/_components/form-footer";
 import DropItem from "../_components/drop-item";
 
@@ -30,9 +31,14 @@ const uploadProps: UploadProps = {
 export default function ItemEditor({ data }: { data: Item }) {
   const [visible, setVisible] = useState(false);
   const [editItem, { isLoading, error }] = useEditItemMutation();
-  const { edit } = useAppSelector((state) => state.items);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const {
+    items: { edit },
+    category: { category },
+  } = useAppSelector((state) => state);
+
+  useGetCategoryQuery();
 
   useEffect(() => {
     dispatch(SET_EDIT(data));
@@ -109,7 +115,15 @@ export default function ItemEditor({ data }: { data: Item }) {
           initialValues={edit}
         >
           <FormItem node={<AppInput />} name="title" />
-          <FormItem node={<AppSelect options={options} />} name="category" />
+          <FormItem
+            node={
+              <AppSelect
+                options={categoryOptions(category)}
+                onChange={(e) => setValue({ key: "category", value: e })}
+              />
+            }
+            name="category"
+          />
           <FormItem
             node={<AppInput type="number" prefix="$" min={0} />}
             name="price"

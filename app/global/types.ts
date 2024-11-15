@@ -17,7 +17,7 @@ export type Item = {
   description: string;
   active: boolean;
   amount: number;
-  category: "Item" | "Meal";
+  category: string;
 };
 
 export type Detail = { key: string; value: any };

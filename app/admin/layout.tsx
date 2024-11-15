@@ -45,7 +45,7 @@ interface Props {
   dashboard: boolean;
 }
 
-export default function Admin({ children, dashboard }: Props) {
+export default function Admin({ children }: Props) {
   const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(true);
   const router = useRouter();
   const path = usePathname();

@@ -24,7 +24,7 @@ export const Styles = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: gold;
+        background-color: #f0f0f0;
         font-size: 25px;
       }
     }
@@ -35,4 +35,11 @@ export const Styles = styled.div`
       width: 100%;
     }
   }
+`;
+
+export const PieBox = styled.div`
+    width: 50%;
+    background: #fff;
+    border-radius: 20px;
+    height: 50%;
 `;

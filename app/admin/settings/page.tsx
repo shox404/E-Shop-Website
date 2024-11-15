@@ -9,10 +9,9 @@ import {
   AppButton,
   AppInput,
   AppPassword,
-  Inline,
   Navbar,
 } from "@/app/_styles/ui/element";
-import { AdminData, Category, Detail, FormValue } from "@/app/global/types";
+import { AdminData, Category, FormValue } from "@/app/global/types";
 import {
   useEditAdminDataMutation,
   useGetAdminDataQuery,
@@ -45,6 +44,7 @@ export default function Settings() {
     admin: { data },
     category: { category, value },
   } = useAppSelector((state) => state);
+
   useGetCategoryQuery();
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { Text, Thin, Title } from "@/app/_styles/ui/text";
+import { Thin, Title } from "@/app/_styles/ui/text";
 
 interface Props {
   icon: any;

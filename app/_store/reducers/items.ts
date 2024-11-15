@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createItem, deleteItem, editItem, getItem } from "../services/items";
 import { Detail, Item } from "@/app/global/types";
 
-type State = { item: Item; edit: Item; items: Item[] };
+type State = { item: Item; edit: Item; items: Item[]; productsAmount: {} };
 
 const itemSchema: Item = {
   images: [],
@@ -11,13 +11,14 @@ const itemSchema: Item = {
   description: "",
   active: false,
   amount: 0,
-  category: "Item",
+  category: "",
 };
 
 const initialState: State = {
   item: itemSchema,
   edit: itemSchema,
   items: [],
+  productsAmount: [],
 };
 
 const items = createSlice({
@@ -44,6 +45,14 @@ const items = createSlice({
       })
       .addMatcher(getItem.matchFulfilled, (state, { payload }) => {
         state.items = payload;
+        const ctg = payload.map((e) => e.category);
+        // const amount = payload.reduce((acc, item)=>{
+        //   if (item == )
+        // },[])
+        // console.log(amount);
+        
+        // payload.
+        state.productsAmount = [];
       })
       .addMatcher(editItem.matchFulfilled, (state, { payload }) => {
         state.items.map((item, index) => {

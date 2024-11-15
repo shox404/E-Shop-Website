@@ -13,12 +13,13 @@ import {
   Navbar,
 } from "@/app/_styles/ui/element";
 import { Text, Title } from "@/app/_styles/ui/text";
-import { Detail, FormValue, Item } from "@/app/global/types";
-import { options, errorMsg } from "@/app/global/utils";
+import { Detail, FormValue } from "@/app/global/types";
+import { categoryOptions, errorMsg } from "@/app/global/utils";
 import { InboxOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Form, message, Upload, UploadProps } from "antd";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect } from "react";
+import { useGetCategoryQuery } from "@/app/_store/services/category";
 
 const props: UploadProps = {
   name: "file",
@@ -30,9 +31,14 @@ const props: UploadProps = {
 
 export default function Create() {
   const dispatch = useAppDispatch();
-  const { item } = useAppSelector((state) => state.items);
+  const {
+    items: { item },
+    category: { category },
+  } = useAppSelector((state) => state);
   const [create, { isLoading, error }] = useCreateItemMutation();
   const router = useRouter();
+
+  useGetCategoryQuery();
 
   useEffect(() => errorMsg(error), [error]);
 
@@ -101,7 +107,15 @@ export default function Create() {
             initialValues={item}
           >
             <FormItem node={<AppInput />} name="title" />
-            <FormItem node={<AppSelect options={options} />} name="category" />
+            <FormItem
+              node={
+                <AppSelect
+                  options={categoryOptions(category)}
+                  onChange={(e) => setValue({ key: "category", value: e })}
+                />
+              }
+              name="category"
+            />
             <FormItem
               node={<AppInput type="number" prefix="$" min={0} />}
               name="price"

@@ -129,14 +129,18 @@ export default function Products() {
                     <Text>{format(item.amount)}</Text>
                   </Inline>
                   <Br px={5} />
-                  <Dropdown menu={{ items: drops(item) }} trigger={["click"]}>
-                    <Inline y="end">
-                      <Text>Actions</Text>
-                      <AppButton>
-                        <EllipsisOutlined />
-                      </AppButton>
-                    </Inline>
-                  </Dropdown>
+                  <div>
+                    <Dropdown menu={{ items: drops(item) }} trigger={["click"]}>
+                      <Inline y="end">
+                        <Text>{item.category}</Text>
+                        <div>
+                          <AppButton>
+                            <EllipsisOutlined />
+                          </AppButton>
+                        </div>
+                      </Inline>
+                    </Dropdown>
+                  </div>
                 </div>
               </motion.div>
             ))}
