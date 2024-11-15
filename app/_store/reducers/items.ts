@@ -45,14 +45,16 @@ const items = createSlice({
       })
       .addMatcher(getItem.matchFulfilled, (state, { payload }) => {
         state.items = payload;
-        const ctg = payload.map((e) => e.category);
-        // const amount = payload.reduce((acc, item)=>{
-        //   if (item == )
-        // },[])
-        // console.log(amount);
-        
-        // payload.
-        state.productsAmount = [];
+
+        const ctg = Array.from(new Set(payload.map((e) => e.category)));
+
+        state.productsAmount = ctg.map((item: string) => ({
+          name: item,
+          value: payload.reduce((acc: number, e: Item) => {
+            if (item == e.category) acc += +e.amount;
+            return acc;
+          }, 0),
+        }));
       })
       .addMatcher(editItem.matchFulfilled, (state, { payload }) => {
         state.items.map((item, index) => {

@@ -11,18 +11,23 @@ export default function Products() {
   useGetCategoryQuery();
 
   const config = {
-    data: { value: productsAmount || [] },
+    data: { value: productsAmount },
     angleField: "value",
     colorField: "name",
     legend: false,
     innerRadius: 0.5,
     labels: [
-      { text: "name", style: { fontSize: 10, fontWeight: "bold" } },
+      {
+        text: "name",
+        style: { fontSize: 20, fill: "#000" },
+      },
       {
         text: (d: any, i: any, data: any) => (i < data.length ? d.value : ""),
         style: {
-          fontSize: 15,
-          dy: 20,
+          fontSize: 25,
+          dy: 25,
+          fontWeight: "bold",
+          fill: "#2e2e2e",
         },
       },
     ],

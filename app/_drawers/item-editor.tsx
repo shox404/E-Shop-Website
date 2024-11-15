@@ -4,12 +4,7 @@ import FormItem from "@/app/_components/form-item";
 import { useAppDispatch, useAppSelector } from "@/app/_store/hooks";
 import { SET_EDIT, EQUAL_EDIT } from "@/app/_store/reducers/items";
 import { useEditItemMutation } from "@/app/_store/services/items";
-import {
-  AppInput,
-  AppSelect,
-  AppTextArea,
-  Inline,
-} from "@/app/_styles/ui/element";
+import { AppInput, AppSelect, AppTextArea } from "@/app/_styles/ui/element";
 import { Detail, FormValue, Item } from "@/app/global/types";
 import { errorMsg, categoryOptions } from "@/app/global/utils";
 import { EditFilled, InboxOutlined } from "@ant-design/icons";
