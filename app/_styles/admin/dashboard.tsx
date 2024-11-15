@@ -29,6 +29,10 @@ export const Styles = styled.div`
       }
     }
   }
+  .blocks {
+    align-items: baseline;
+    height: auto;
+  }
   @media screen and (max-width: 480px) {
     padding-inline: 0;
     .boxes .box {
@@ -38,8 +42,12 @@ export const Styles = styled.div`
 `;
 
 export const PieBox = styled.div`
-    width: 50%;
-    background: #fff;
-    border-radius: 20px;
-    height: 50%;
+  width: 300px;
+  height: 300px;
+  background: #fff;
+  margin-top: 20px;
+  border-radius: 20px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+}
 `;

@@ -12,23 +12,15 @@ export default function Products() {
 
   const config = {
     data: { value: productsAmount },
-    angleField: "value",
-    colorField: "name",
+    angleField: "amount",
+    colorField: "title",
     legend: false,
     innerRadius: 0.5,
     labels: [
+      { text: "title", style: { fontSize: 10, fill: "#000" } },
       {
-        text: "name",
-        style: { fontSize: 20, fill: "#000" },
-      },
-      {
-        text: (d: any, i: any, data: any) => (i < data.length ? d.value : ""),
-        style: {
-          fontSize: 25,
-          dy: 25,
-          fontWeight: "bold",
-          fill: "#2e2e2e",
-        },
+        text: "amount",
+        style: { fontSize: 20, dy: 17, fontWeight: "bold", fill: "#2e2e2e" },
       },
     ],
     style: {
@@ -43,6 +35,7 @@ export default function Products() {
       },
     },
   };
+
   return (
     <PieBox>
       <Pie {...config} />

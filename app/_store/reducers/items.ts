@@ -49,8 +49,8 @@ const items = createSlice({
         const ctg = Array.from(new Set(payload.map((e) => e.category)));
 
         state.productsAmount = ctg.map((item: string) => ({
-          name: item,
-          value: payload.reduce((acc: number, e: Item) => {
+          title: item,
+          amount: payload.reduce((acc: number, e: Item) => {
             if (item == e.category) acc += +e.amount;
             return acc;
           }, 0),
